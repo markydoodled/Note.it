@@ -14,58 +14,49 @@ struct ContentView: View {
     @State private var isShowingShare = false
     @State private var isShowingInfo = false
     var body: some View {
-        NavigationView {
-            List {
-                Button(action: {NSDocumentController().newDocument(Any?.self)}) {
-                    Label("New", systemImage: "plus")
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                Button(action: {NSDocumentController().openDocument(Any?.self)}) {
-                    Label("Open", systemImage: "doc")
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                Button(action: {NSApp.sendAction(#selector(NSDocument.save(_:)), to: nil, from: self)}) {
-                    Label("Save", systemImage: "square.and.arrow.down")
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                Button(action: {copyToClipBoard(textToCopy: document.text)}) {
-                    Label("Copy", systemImage: "doc.on.doc")
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                Button(action: {func printDoc() {
-                    let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
-                    printView.string = document.text
-                        let printInfo = NSPrintInfo()
-
-                        printInfo.bottomMargin = 72
-                        printInfo.topMargin = 72
-                        printInfo.leftMargin = 72
-                        printInfo.rightMargin = 72
-                    
-                    let printPanel = NSPrintPanel()
-                    printPanel.options = [.showsPageSetupAccessory, .showsCopies, .showsOrientation, .showsPageRange, .showsPaperSize, .showsPreview, .showsPrintSelection, .showsScaling]
-
-                        let printOp = NSPrintOperation(view: printView, printInfo: printInfo)
-                    printOp.printPanel = printPanel
-                        printOp.run()
-                }
-                    printDoc()
-                }) {
-                    Label("Print", systemImage: "printer")
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                Button(action: {self.isShowingShare = true}) {
-                    Label("Share", systemImage: "square.and.arrow.up")
-                }
-                .buttonStyle(BorderlessButtonStyle())
-                .background(SharingsPicker(isPresented: $isShowingShare, sharingItems: [NSDocumentController().currentDocument as Any]))
-            }
         EditorControllerView(text: $document.text)
-        }
             .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    Button(action: {toggleSidebar()}) {
-                        Image(systemName: "sidebar.left")
+                ToolbarItem(placement: .status) {
+                    Button(action: {NSDocumentController().newDocument(Any?.self)}) {
+                        Image(systemName: "plus")
+                    }
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {NSDocumentController().openDocument(Any?.self)}) {
+                        Image(systemName: "doc")
+                    }
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {NSApp.sendAction(#selector(NSDocument.save(_:)), to: nil, from: self)}) {
+                        Image(systemName: "square.and.arrow.down")
+                    }
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {copyToClipBoard(textToCopy: document.text)}) {
+                        Image(systemName: "doc.on.doc")
+                    }
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {func printDoc() {
+                        let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
+                        printView.string = document.text
+                            let printInfo = NSPrintInfo()
+
+                            printInfo.bottomMargin = 72
+                            printInfo.topMargin = 72
+                            printInfo.leftMargin = 72
+                            printInfo.rightMargin = 72
+                        
+                        let printPanel = NSPrintPanel()
+                        printPanel.options = [.showsPageSetupAccessory, .showsCopies, .showsOrientation, .showsPageRange, .showsPaperSize, .showsPreview, .showsPrintSelection, .showsScaling]
+
+                            let printOp = NSPrintOperation(view: printView, printInfo: printInfo)
+                        printOp.printPanel = printPanel
+                            printOp.run()
+                    }
+                        printDoc()
+                    }) {
+                        Image(systemName: "printer")
                     }
                 }
             }
