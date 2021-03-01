@@ -11,10 +11,31 @@ import AppKit
 struct ContentView: View {
     @Binding var document: TextEdit_itDocument
     @State private var text = ""
-    @State private var isShowingShare = false
-    @State private var isShowingInfo = false
     var body: some View {
         EditorControllerView(text: $document.text)
+            .touchBar {
+                Button(action: {NSDocumentController().newDocument(Any?.self)}) {
+                    Image(systemName: "plus")
+                }
+                Button(action: {NSDocumentController().openDocument(Any?.self)}) {
+                    Image(systemName: "doc")
+                }
+                Button(action: {NSApp.sendAction(#selector(NSDocument.save(_:)), to: nil, from: self)}) {
+                    Image(systemName: "square.and.arrow.down")
+                }
+                Button(action: {copyToClipBoard(textToCopy: document.text)}) {
+                    Image(systemName: "doc.on.doc")
+                }
+                Button(action: {printDoc()}) {
+                    Image(systemName: "printer")
+                }
+                Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
+                    Image(systemName: "folder")
+                }
+                Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
+                    Image(systemName: "doc.badge.plus")
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .status) {
                     Button(action: {NSDocumentController().newDocument(Any?.self)}) {
@@ -32,34 +53,41 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .status) {
-                    Button(action: {copyToClipBoard(textToCopy: document.text)}) {
-                        Image(systemName: "doc.on.doc")
-                    }
+                    Menu {
+                        Button(action: {copyToClipBoard(textToCopy: document.text)}) {
+                            Text("􀉁 Copy")
+                        }
+                        Button(action: {printDoc()}) {
+                            Text("􀎚 Print")
+                        }
+                        Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
+                            Text("􀈕 Move To...")
+                        }
+                        Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
+                            Text("􀣗 Duplicate")
+                        }
+                    } label: {
+                        Label("More", systemImage: "ellipsis.circle")
                 }
-                ToolbarItem(placement: .status) {
-                    Button(action: {func printDoc() {
-                        let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
-                        printView.string = document.text
-                            let printInfo = NSPrintInfo()
-
-                            printInfo.bottomMargin = 72
-                            printInfo.topMargin = 72
-                            printInfo.leftMargin = 72
-                            printInfo.rightMargin = 72
-                        
-                        let printPanel = NSPrintPanel()
-                        printPanel.options = [.showsPageSetupAccessory, .showsCopies, .showsOrientation, .showsPageRange, .showsPaperSize, .showsPreview, .showsPrintSelection, .showsScaling]
-
-                            let printOp = NSPrintOperation(view: printView, printInfo: printInfo)
-                        printOp.printPanel = printPanel
-                            printOp.run()
-                    }
-                        printDoc()
-                    }) {
-                        Image(systemName: "printer")
-                    }
                 }
             }
+    }
+    func printDoc() {
+        let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
+        printView.string = document.text
+            let printInfo = NSPrintInfo()
+
+            printInfo.bottomMargin = 72
+            printInfo.topMargin = 72
+            printInfo.leftMargin = 72
+            printInfo.rightMargin = 72
+        
+        let printPanel = NSPrintPanel()
+        printPanel.options = [.showsPageSetupAccessory, .showsCopies, .showsOrientation, .showsPageRange, .showsPaperSize, .showsPreview, .showsPrintSelection, .showsScaling]
+
+            let printOp = NSPrintOperation(view: printView, printInfo: printInfo)
+        printOp.printPanel = printPanel
+            printOp.run()
     }
 }
 
@@ -129,7 +157,7 @@ override func loadView() {
 
 override func viewDidAppear() {
     self.view.window?.makeFirstResponder(self.view)
-}
+    }
 }
 
 
@@ -184,10 +212,4 @@ private func copyToClipBoard(textToCopy: String) {
     pasteBoard.clearContents()
     pasteBoard.setString(textToCopy, forType: .string)
 
-}
-
-struct ContentView_Previews: PreviewProvider {
-static var previews: some View {
-    ContentView(document: .constant(TextEdit_itDocument()))
-}
 }

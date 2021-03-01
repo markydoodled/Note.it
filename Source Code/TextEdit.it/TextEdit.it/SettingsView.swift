@@ -8,7 +8,36 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State var tabSelection = 1
     var body: some View {
+        TabView(selection: $tabSelection) {
+            Form {
+              Text("Keyboard Preferences Here")
+            }
+            .padding(20)
+            .frame(width: 350, height: 150)
+            .tag(1)
+            .tabItem {
+                Label("Keyboard", systemImage: "keyboard")
+            }
+            Form {
+               Text("Editor Preferences Here")
+            }
+            .padding(20)
+            .frame(width: 350, height: 150)
+            .tag(2)
+            .tabItem {
+                Label("Editor", systemImage: "note.text")
+            }
+            Form {
+                Text("Themes Preferences Here")
+            }
+            .padding(20)
+            .frame(width: 350, height: 150)
+            .tag(3)
+            .tabItem {
+                Label("Themes", systemImage: "paintbrush")
+            }
         Form {
             GroupBox(label: Label("Info", systemImage: "info.circle")) {
                 VStack {
@@ -36,6 +65,11 @@ struct SettingsView: View {
         }
                 .padding(20)
                 .frame(width: 350, height: 150)
+        .tag(4)
+        .tabItem {
+            Label("Misc.", systemImage: "ellipsis.circle")
+        }
+    }
     }
 }
 
