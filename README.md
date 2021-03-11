@@ -7,8 +7,10 @@ This is a simple text editor for Mac that is mostly built with SwiftUI. It is de
 
  - Easy to learn interface
  - Familiar text editing commands
- - Easy access to priority commands in the sidebar
- - Full system font bar at the top of the text editor panel
+ - Easy access to priority commands in the toolbar
+ - Syntax highlighting
+ - Support for editor themes
+ - Ability to change some commands to custom key bindings
  - Support for both Intel and Apple Silicon Macs
 
 ## **Features To Be Implemented**
@@ -16,7 +18,6 @@ This is a simple text editor for Mac that is mostly built with SwiftUI. It is de
  - More file formats
  - Export to other file formats
  - In-app Finder metadata integration for the document
- - The ability to accept images
  - An iOS/iPadOS version (possibly)
 
 ## **Things To Note**
