@@ -7,12 +7,51 @@
 
 import SwiftUI
 import AppKit
+import CodeMirror_SwiftUI
+import KeyboardShortcuts
 
 struct ContentView: View {
     @Binding var document: TextEdit_itDocument
     @State private var text = ""
+    @State var codeMode = CodeMode.swift.mode()
+    @State var codeTheme = CodeViewTheme.zenburnesque
+    @State var settings = SettingsView()
     var body: some View {
-        EditorControllerView(text: $document.text)
+        NavigationView {
+            List {
+                Section(header: Text("Metadata")) {
+                    Text("Title")
+                    Text("File Type")
+                    Text("Author")
+                    Text("Encoding")
+                    Text("Comments")
+                    Text("Created")
+                    Text("Last Editor")
+                    Text("Modified")
+                }
+            }
+            .listStyle(SidebarListStyle())
+            GeometryReader { reader in
+              ScrollView {
+                CodeView(theme: codeTheme,
+                        code: $document.text,
+                         mode: codeMode,
+                         fontSize: settings.fontSize,
+                         showInvisibleCharacters: settings.showInvisibleCharacters,
+                         lineWrapping: settings.lineWrapping)
+                  .onLoadSuccess {
+                    print("Loaded")
+                  }
+                  .onLoadFail { error in
+                    print("Load failed : \(error.localizedDescription)")
+                  }
+                  .frame(height: reader.size.height)
+              }.frame(height: reader.size.height)
+            }
+        }
+        .onAppear {
+            self.test()
+        }
             .touchBar {
                 Button(action: {NSDocumentController().newDocument(Any?.self)}) {
                     Image(systemName: "plus")
@@ -37,6 +76,11 @@ struct ContentView: View {
                 }
             }
             .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button(action: {toggleSidebar()}) {
+                        Image(systemName: "sidebar.left")
+                    }
+                }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSDocumentController().newDocument(Any?.self)}) {
                         Image(systemName: "plus")
@@ -89,77 +133,20 @@ struct ContentView: View {
         printOp.printPanel = printPanel
             printOp.run()
     }
-}
+    func test() {
+        let testMenuItem = NSMenuItem()
+        NSApp.mainMenu?.addItem(testMenuItem)
 
-struct EditorControllerView: NSViewControllerRepresentable {
-    @Binding var text: String
-    
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, NSTextStorageDelegate {
-        private var parent: EditorControllerView
-        var shouldUpdateText = true
-        
-        init(_ parent: EditorControllerView) {
-            self.parent = parent
-        }
-        
-        func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
-            guard shouldUpdateText else {
-                return
-            }
-            let edited = textStorage.attributedSubstring(from: editedRange).string
-            let insertIndex = parent.text.utf16.index(parent.text.utf16.startIndex, offsetBy: editedRange.lowerBound)
-            
-            func numberOfCharactersToDelete() -> Int {
-                editedRange.length - delta
-            }
-            
-            let endIndex = parent.text.utf16.index(insertIndex, offsetBy: numberOfCharactersToDelete())
-            self.parent.text.replaceSubrange(insertIndex..<endIndex, with: edited)
-        }
-    }
+        let testMenu = NSMenu()
+        testMenu.title = "Test"
+        testMenuItem.submenu = testMenu
 
-    func makeNSViewController(context: Context) -> EditorController {
-        let vc = EditorController()
-        vc.textView.textStorage?.delegate = context.coordinator
-        return vc
-    }
-    
-    func updateNSViewController(_ nsViewController: EditorController, context: Context) {
-        if text != nsViewController.textView.string {
-            context.coordinator.shouldUpdateText = false
-            nsViewController.textView.string = text
-            context.coordinator.shouldUpdateText = true
-        }
+        let shortcut1 = NSMenuItem()
+        shortcut1.title = "Shortcut 1"
+        shortcut1.setShortcut(for: .newCommand)
+        testMenu.addItem(shortcut1)
     }
 }
-
-class EditorController: NSViewController {
-var textView = NSTextView()
-    
-override func loadView() {
-    let scrollView = NSScrollView()
-    scrollView.hasVerticalScroller = true
-    
-    textView.autoresizingMask = [.width]
-    textView.allowsUndo = false
-    textView.isGrammarCheckingEnabled = true
-    textView.isContinuousSpellCheckingEnabled = true
-    textView.usesInspectorBar = true
-    textView.usesFindBar = true
-    scrollView.documentView = textView
-    
-    self.view = scrollView
-}
-
-override func viewDidAppear() {
-    self.view.window?.makeFirstResponder(self.view)
-    }
-}
-
 
 public func toggleSidebar() {
         NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)

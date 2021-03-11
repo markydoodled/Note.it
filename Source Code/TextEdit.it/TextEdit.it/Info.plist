@@ -37,6 +37,8 @@
 	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2021 MSJ - Mark Howard</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -59,7 +61,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>NSHumanReadableCopyright</key>
-	<string>© 2021 MSJ - Mark Howard</string>
 </dict>
 </plist>
