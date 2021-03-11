@@ -21,13 +21,21 @@ struct ContentView: View {
             List {
                 Section(header: Text("Metadata")) {
                     Text("Title")
+                        .bold()
                     Text("File Type")
+                        .bold()
                     Text("Author")
+                        .bold()
                     Text("Encoding")
+                        .bold()
                     Text("Comments")
+                        .bold()
                     Text("Created")
+                        .bold()
                     Text("Last Editor")
+                        .bold()
                     Text("Modified")
+                        .bold()
                 }
             }
             .listStyle(SidebarListStyle())
