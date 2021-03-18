@@ -17,6 +17,7 @@ struct SettingsView: View {
     @AppStorage("lineWrapping") var lineWrapping = true
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
+    @State var syntax = CodeMode.text.mode()
     var themes = CodeViewTheme.allCases.sorted {
       return $0.rawValue < $1.rawValue
     }
@@ -147,8 +148,8 @@ struct SettingsView: View {
                   }
                 }
                 Picker(selection: $selectedSyntax, label: Text("Syntax Highlighting: ")) {
-                    Button(action: {}) {
-                        Text("Test")
+                    Button(action: {self.syntax = CodeMode.swift.mode()}) {
+                        Text("Swift")
                     }
                     .tag(1)
                 }

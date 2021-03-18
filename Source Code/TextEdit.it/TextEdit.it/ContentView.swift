@@ -16,26 +16,51 @@ struct ContentView: View {
     @State var codeMode = CodeMode.swift.mode()
     @State var codeTheme = CodeViewTheme.zenburnesque
     @State var settings = SettingsView()
+    @State var fileTypeAttribute: String
+    @State var fileSizeAttribute: Int64
+    @State var fileTitleAtribute: String
+    @State var fileCreatedAttribute: Date
+    @State var fileModifiedAttribute: Date
+    @State var fileExtensionAttribute: String
+    @State var fileOwnerAttribute: String
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Metadata")) {
+                    Group {
                     Text("Title")
                         .bold()
-                    Text("File Type")
+                        Text("\(fileTitleAtribute)")
+                    Text("File Extension")
                         .bold()
-                    Text("Author")
+                        Text("\(fileExtensionAttribute)")
+                    Text("Size")
                         .bold()
-                    Text("Encoding")
+                        Text("\(fileSizeAttribute) Bytes")
+                    Text("File Path")
                         .bold()
-                    Text("Comments")
+                        Text("")
+                    Text("Owner")
                         .bold()
-                    Text("Created")
-                        .bold()
-                    Text("Last Editor")
-                        .bold()
-                    Text("Modified")
-                        .bold()
+                        Text("\(fileOwnerAttribute)")
+                    }
+                    Group {
+                        Text("Encoding")
+                            .bold()
+                        Text("")
+                        Text("Comments")
+                            .bold()
+                        Text("")
+                        Text("Created")
+                            .bold()
+                        Text("\(fileCreatedAttribute)")
+                        Text("Modified")
+                            .bold()
+                        Text("\(fileModifiedAttribute)")
+                        Text("File Type")
+                            .bold()
+                        Text("\(fileTypeAttribute)")
+                }
                 }
             }
             .listStyle(SidebarListStyle())
@@ -43,7 +68,7 @@ struct ContentView: View {
               ScrollView {
                 CodeView(theme: codeTheme,
                         code: $document.text,
-                         mode: codeMode,
+                        mode: settings.syntax,
                          fontSize: settings.fontSize,
                          showInvisibleCharacters: settings.showInvisibleCharacters,
                          lineWrapping: settings.lineWrapping)
@@ -58,7 +83,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            self.test()
+            self.attributes()
         }
             .touchBar {
                 Button(action: {NSDocumentController().newDocument(Any?.self)}) {
@@ -141,18 +166,37 @@ struct ContentView: View {
         printOp.printPanel = printPanel
             printOp.run()
     }
-    func test() {
-        let testMenuItem = NSMenuItem()
-        NSApp.mainMenu?.addItem(testMenuItem)
+    func attributes() {
+        let fileManager = FileManager.default
 
-        let testMenu = NSMenu()
-        testMenu.title = "Test"
-        testMenuItem.submenu = testMenu
+        if let documentsURLs = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            do {
+                let fileNames = try fileManager.contentsOfDirectory(atPath: documentsURLs.path)
 
-        let shortcut1 = NSMenuItem()
-        shortcut1.title = "Shortcut 1"
-        shortcut1.setShortcut(for: .newCommand)
-        testMenu.addItem(shortcut1)
+                for fileName in fileNames {
+                    let fileURL = documentsURLs.appendingPathComponent(fileName)
+
+                    let fileAttribute = try fileManager.attributesOfItem(atPath: fileURL.path)
+                    let fileSize = fileAttribute[FileAttributeKey.size] as! Int64
+                    let fileType = fileAttribute[FileAttributeKey.type] as! String
+                    let filecreationDate = fileAttribute[FileAttributeKey.creationDate] as! Date
+                    let filemodificationDate = fileAttribute[FileAttributeKey.modificationDate] as! Date
+                    let fileOwner = fileAttribute[FileAttributeKey.ownerAccountName] as! String
+                    let fileExtension = fileURL.pathExtension;
+
+                    print("Name: \(fileName), Size: \(fileSize), Type: \(fileType), Date: \(filecreationDate), Extension: \(fileExtension), Modification: \(filemodificationDate), Owner: \(fileOwner)")
+                    fileTypeAttribute = fileType
+                    fileSizeAttribute = fileSize
+                    fileTitleAtribute = fileName
+                    fileCreatedAttribute = filecreationDate
+                    fileModifiedAttribute = filemodificationDate
+                    fileExtensionAttribute = fileExtension
+                    fileOwnerAttribute = fileOwner
+                }
+            } catch {
+                print("Error: \(error)")
+            }
+        }
     }
 }
 
