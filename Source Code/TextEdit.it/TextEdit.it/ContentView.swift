@@ -23,6 +23,14 @@ struct ContentView: View {
     @State var fileModifiedAttribute: Date
     @State var fileExtensionAttribute: String
     @State var fileOwnerAttribute: String
+    @State var filePathAttribute: String
+    @State var fileCommentsAttribute: String
+    private let fileByteCountFormatter: ByteCountFormatter = {
+        let bcf = ByteCountFormatter()
+        bcf.allowedUnits = [.useAll]
+        bcf.countStyle = .file
+        return bcf
+    }()
     var body: some View {
         NavigationView {
             List {
@@ -36,7 +44,7 @@ struct ContentView: View {
                         Text("\(fileExtensionAttribute)")
                     Text("Size")
                         .bold()
-                        Text("\(fileSizeAttribute) Bytes")
+                        Text("\(fileByteCountFormatter.string(fromByteCount: fileSizeAttribute))")
                     Text("File Path")
                         .bold()
                         Text("")

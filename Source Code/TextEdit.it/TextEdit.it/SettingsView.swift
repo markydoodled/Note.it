@@ -21,6 +21,7 @@ struct SettingsView: View {
     var themes = CodeViewTheme.allCases.sorted {
       return $0.rawValue < $1.rawValue
     }
+    private let modesList = CodeMode.list()
     var body: some View {
         TabView(selection: $tabSelection) {
             Form {
@@ -130,9 +131,11 @@ struct SettingsView: View {
                     Toggle(isOn: $lineWrapping) {
                         Text("Line Wrapping")
                     }
+                    .toggleStyle(SwitchToggleStyle())
                     Toggle(isOn: $showInvisibleCharacters) {
                         Text("Show Invisible Characters")
                     }
+                    .toggleStyle(SwitchToggleStyle())
                 }
             }
             .padding(20)
@@ -148,7 +151,7 @@ struct SettingsView: View {
                   }
                 }
                 Picker(selection: $selectedSyntax, label: Text("Syntax Highlighting: ")) {
-                    Button(action: {self.syntax = CodeMode.swift.mode()}) {
+                    Button(action: {}) {
                         Text("Swift")
                     }
                     .tag(1)
