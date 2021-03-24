@@ -20,7 +20,7 @@ struct TextEdit_itApp: App {
         .commands {
             SidebarCommands()
             CommandGroup(replacing: CommandGroupPlacement.printItem) {
-                Button(action: {}) {
+                Button(action: {print(NSDocumentController().currentDocument?.presentedItemURL as Any)}) {
                     Text("Print")
                 }
                 .keyboardShortcut("p", modifiers: .command)
@@ -35,6 +35,7 @@ struct TextEdit_itApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         createMenus()
+        let file = NSDocumentController().currentDocument?.presentedItemURL
     }
     func createMenus() {
         
