@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppKit
+import WebKit
 import CodeMirror_SwiftUI
 import KeyboardShortcuts
 
@@ -102,7 +103,7 @@ struct ContentView: View {
               ScrollView {
                 CodeView(theme: codeTheme,
                         code: $document.text,
-                        mode: settings.syntax,
+                        mode: settings.syntax.mode(),
                          fontSize: settings.fontSize,
                          showInvisibleCharacters: settings.showInvisibleCharacters,
                          lineWrapping: settings.lineWrapping)

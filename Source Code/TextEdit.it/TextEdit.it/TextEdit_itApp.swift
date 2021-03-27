@@ -19,8 +19,29 @@ struct TextEdit_itApp: App {
         }
         .commands {
             SidebarCommands()
-            CommandGroup(replacing: CommandGroupPlacement.printItem) {
-                Button(action: {print(NSDocumentController().currentDocument?.presentedItemURL as Any)}) {
+            CommandGroup(after: CommandGroupPlacement.printItem) {
+                Button(action: { func print2(_ sender : Any) {
+                    let printingView = NSHostingView(rootView: ContentView(document: .constant(TextEdit_itDocument()), fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: ""))
+                    
+                    let printInfo = NSPrintInfo()
+                    printInfo.bottomMargin = 72
+                    printInfo.topMargin = 72
+                    printInfo.leftMargin = 72
+                    printInfo.rightMargin = 72
+                    
+                    let printPanel = NSPrintPanel()
+                    printPanel.options = [.showsPageSetupAccessory, .showsCopies, .showsOrientation, .showsPageRange, .showsPaperSize, .showsPreview, .showsPrintSelection, .showsScaling]
+                    
+                    let printOperation = NSPrintOperation(view: printingView, printInfo: printInfo)
+                    printOperation.view?.frame = .init(x: 0, y: 0, width: 500, height: 500)
+                    printOperation.showsPrintPanel = true
+                    printOperation.showsProgressPanel = true
+                    printOperation.printPanel = printPanel
+                    printOperation.run()
+                    
+                }
+                print2(Any.self)
+                }) {
                     Text("Print")
                 }
                 .keyboardShortcut("p", modifiers: .command)
@@ -35,7 +56,7 @@ struct TextEdit_itApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         createMenus()
-        let file = NSDocumentController().currentDocument?.presentedItemURL
+        createEditMenu()
     }
     func createMenus() {
         
@@ -43,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.mainMenu?.addItem(testMenuItem)
 
         let testMenu = NSMenu()
-        testMenu.title = "Test"
+        testMenu.title = "File Test"
         testMenuItem.submenu = testMenu
 
         let shortcut1 = NSMenuItem()
@@ -58,6 +79,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         shortcut2.setShortcut(for: .openCommand)
         testMenu.addItem(shortcut2)
 
+        testMenu.addItem(NSMenuItem.separator())
+        
         let shortcut3 = NSMenuItem()
         shortcut3.title = "Save"
         shortcut3.action = #selector(saveShortcutAction)
@@ -88,6 +111,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         shortcut4.setShortcut(for: .moveToCommand)
         testMenu.addItem(shortcut7)
     }
+    
+    func createEditMenu() {
+        let testEditMenuItem = NSMenuItem()
+        NSApp.mainMenu?.addItem(testEditMenuItem)
+        
+        let testEditMenu = NSMenu()
+        testEditMenu.title = "Edit Test"
+        testEditMenuItem.submenu = testEditMenu
+    }
+    
     @objc
     func newShortcutAction(_ sender: NSMenuItem) {
         let doc = NSDocumentController()
