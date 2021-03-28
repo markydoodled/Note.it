@@ -7,15 +7,12 @@
 
 import SwiftUI
 import AppKit
-import WebKit
 import CodeMirror_SwiftUI
 import KeyboardShortcuts
 
 struct ContentView: View {
     @Binding var document: TextEdit_itDocument
     @State private var text = ""
-    @State var codeMode = CodeMode.swift.mode()
-    @State var codeTheme = CodeViewTheme.zenburnesque
     @State var settings = SettingsView()
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
@@ -101,7 +98,7 @@ struct ContentView: View {
             .listStyle(SidebarListStyle())
             GeometryReader { reader in
               ScrollView {
-                CodeView(theme: codeTheme,
+                CodeView(theme: settings.theme,
                         code: $document.text,
                         mode: settings.syntax.mode(),
                          fontSize: settings.fontSize,
