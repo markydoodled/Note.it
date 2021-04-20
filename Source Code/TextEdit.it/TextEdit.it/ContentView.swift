@@ -13,7 +13,8 @@ import KeyboardShortcuts
 struct ContentView: View {
     @Binding var document: TextEdit_itDocument
     @State private var text = ""
-    @State var settings = SettingsView()
+    @State var editor = EditorSettings()
+    @State var themes = ThemesSettings()
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
     @State var fileTitleAtribute: String
@@ -29,6 +30,7 @@ struct ContentView: View {
         bcf.countStyle = .file
         return bcf
     }()
+    let fileURL: URL
     var body: some View {
         NavigationView {
             List {
@@ -40,7 +42,7 @@ struct ContentView: View {
                         + Text("Title")
                         .bold()
                             .foregroundColor(.secondary)
-                        Text("\(fileTitleAtribute)")
+                        Text("\(NSDocumentController().currentDocument?.displayName ?? "None")")
                     Text("􀣕 ")
                         .bold()
                         .foregroundColor(.accentColor)
@@ -61,7 +63,7 @@ struct ContentView: View {
                      + Text("File Path")
                         .bold()
                         .foregroundColor(.secondary)
-                        Text("")
+                        Text("\(filePathAttribute)")
                     Text("􀉩 ")
                         .bold()
                         .foregroundColor(.accentColor)
@@ -94,16 +96,20 @@ struct ContentView: View {
                         Text("\(fileTypeAttribute)")
                 }
                 }
+                Button(action: {getAttributes()}) {
+                    Text("Update")
+                }
+                .padding(.horizontal)
             }
             .listStyle(SidebarListStyle())
             GeometryReader { reader in
               ScrollView {
-                CodeView(theme: settings.theme,
+                CodeView(theme: themes.theme,
                         code: $document.text,
-                        mode: settings.syntax.mode(),
-                         fontSize: settings.fontSize,
-                         showInvisibleCharacters: settings.showInvisibleCharacters,
-                         lineWrapping: settings.lineWrapping)
+                        mode: themes.syntax.mode(),
+                         fontSize: editor.fontSize,
+                         showInvisibleCharacters: editor.showInvisibleCharacters,
+                         lineWrapping: editor.lineWrapping)
                   .onLoadSuccess {
                     print("Loaded")
                   }
@@ -115,7 +121,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            self.attributes()
+            print("Name: \(fileURL.lastPathComponent), Size: \(fileURL.fileSizeString), Type: \(fileURL.fileType), Date: \(fileURL.creationDate ?? Date()), Extension: \(fileURL.pathExtension), Modification: \(fileURL.modificationDate ?? Date()), Owner: \(fileURL.fileOwner)")
         }
             .touchBar {
                 Button(action: {NSDocumentController().newDocument(Any?.self)}) {
@@ -180,6 +186,22 @@ struct ContentView: View {
                 }
                 }
             }
+    }
+    func getAttributes() {
+        let creationDate = fileURL.creationDate
+        let modificationDate = fileURL.modificationDate
+        let type = fileURL.fileType
+        let owner = fileURL.fileOwner
+        let size = fileURL.fileSize
+        let fileextension = fileURL.pathExtension
+        let filePath = fileURL.path
+        filePathAttribute = filePath
+        fileExtensionAttribute = fileextension
+        fileSizeAttribute = Int64(size)
+        fileOwnerAttribute = owner
+        fileTypeAttribute = type
+        fileModifiedAttribute = modificationDate!
+        fileCreatedAttribute = creationDate!
     }
     func printDoc() {
         let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
@@ -283,4 +305,39 @@ private func copyToClipBoard(textToCopy: String) {
     pasteBoard.clearContents()
     pasteBoard.setString(textToCopy, forType: .string)
 
+}
+
+extension URL {
+    var attributes: [FileAttributeKey : Any]? {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: path)
+        } catch let error as NSError {
+            print("FileAttribute error: \(error)")
+        }
+        return nil
+    }
+
+    var fileSize: UInt64 {
+        return attributes?[.size] as? UInt64 ?? UInt64(0)
+    }
+
+    var fileSizeString: String {
+        return ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file)
+    }
+
+    var creationDate: Date? {
+        return attributes?[.creationDate] as? Date
+    }
+    
+    var fileType: String {
+        return attributes?[.type] as? String ?? ""
+    }
+    
+    var modificationDate: Date? {
+        return attributes?[.modificationDate] as? Date
+    }
+    
+    var fileOwner: String {
+        return attributes?[.ownerAccountName] as? String ?? ""
+    }
 }

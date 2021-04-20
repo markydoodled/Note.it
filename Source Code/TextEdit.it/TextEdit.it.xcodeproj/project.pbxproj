@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D503DFDF25F3CFF8002EAB53 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D503DFDE25F3CFF8002EAB53 /* KeyboardShortcuts */; };
+		D50C75FD262DE1E400561E7A /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = D50C75FC262DE1E400561E7A /* Preferences */; };
 		D5130CE325CEDE42001256A2 /* TextEdit_itApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5130CE225CEDE42001256A2 /* TextEdit_itApp.swift */; };
 		D5130CE525CEDE42001256A2 /* TextEdit_itDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5130CE425CEDE42001256A2 /* TextEdit_itDocument.swift */; };
 		D5130CE725CEDE42001256A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5130CE625CEDE42001256A2 /* ContentView.swift */; };
 		D5130CE925CEDE44001256A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5130CE825CEDE44001256A2 /* Assets.xcassets */; };
 		D5130CEC25CEDE44001256A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5130CEB25CEDE44001256A2 /* Preview Assets.xcassets */; };
 		D550CE2B25E2AF52005FA8BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D550CE2A25E2AF52005FA8BB /* SettingsView.swift */; };
-		D56347DA25F1143300CDA55E /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D56347D925F1143300CDA55E /* CodeMirror-SwiftUI */; };
-		D56347DB25F1143300CDA55E /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D56347D925F1143300CDA55E /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D559AB75261CBFED00C6E8FC /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */; };
+		D559AB78261CC34400C6E8FC /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */; };
+		D559AB79261CC34400C6E8FC /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,7 +26,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D56347DB25F1143300CDA55E /* CodeMirror-SwiftUI in Embed Frameworks */,
+				D559AB79261CC34400C6E8FC /* CodeMirror-SwiftUI in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,8 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D56347DA25F1143300CDA55E /* CodeMirror-SwiftUI in Frameworks */,
-				D503DFDF25F3CFF8002EAB53 /* KeyboardShortcuts in Frameworks */,
+				D559AB78261CC34400C6E8FC /* CodeMirror-SwiftUI in Frameworks */,
+				D50C75FD262DE1E400561E7A /* Preferences in Frameworks */,
+				D559AB75261CBFED00C6E8FC /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,8 +116,9 @@
 			);
 			name = TextEdit.it;
 			packageProductDependencies = (
-				D56347D925F1143300CDA55E /* CodeMirror-SwiftUI */,
-				D503DFDE25F3CFF8002EAB53 /* KeyboardShortcuts */,
+				D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */,
+				D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */,
+				D50C75FC262DE1E400561E7A /* Preferences */,
 			);
 			productName = TextEdit.it;
 			productReference = D5130CDF25CEDE42001256A2 /* TextEdit.it.app */;
@@ -145,8 +148,9 @@
 			);
 			mainGroup = D5130CD625CEDE42001256A2;
 			packageReferences = (
-				D56347D825F1143300CDA55E /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */,
-				D503DFDD25F3CFF8002EAB53 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				D559AB73261CBFED00C6E8FC /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */,
+				D50C75FB262DE1E400561E7A /* XCRemoteSwiftPackageReference "Preferences" */,
 			);
 			productRefGroup = D5130CE025CEDE42001256A2 /* Products */;
 			projectDirPath = "";
@@ -307,6 +311,7 @@
 				CODE_SIGN_ENTITLEMENTS = TextEdit.it/TextEdit_it.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -317,6 +322,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -331,6 +337,7 @@
 				CODE_SIGN_ENTITLEMENTS = TextEdit.it/TextEdit_it.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -341,6 +348,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -371,33 +379,46 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D503DFDD25F3CFF8002EAB53 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+		D50C75FB262DE1E400561E7A /* XCRemoteSwiftPackageReference "Preferences" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			repositoryURL = "https://github.com/sindresorhus/Preferences.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.1;
+				minimumVersion = 2.2.1;
 			};
 		};
-		D56347D825F1143300CDA55E /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */ = {
+		D559AB73261CBFED00C6E8FC /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Pictarine/CodeMirror-SwiftUI";
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.5;
+				minimumVersion = 1.0.0;
+			};
+		};
+		D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Pictarine/CodeMirror-SwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D503DFDE25F3CFF8002EAB53 /* KeyboardShortcuts */ = {
+		D50C75FC262DE1E400561E7A /* Preferences */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D503DFDD25F3CFF8002EAB53 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			package = D50C75FB262DE1E400561E7A /* XCRemoteSwiftPackageReference "Preferences" */;
+			productName = Preferences;
+		};
+		D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D559AB73261CBFED00C6E8FC /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
 		};
-		D56347D925F1143300CDA55E /* CodeMirror-SwiftUI */ = {
+		D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D56347D825F1143300CDA55E /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
+			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
 			productName = "CodeMirror-SwiftUI";
 		};
 /* End XCSwiftPackageProductDependency section */
