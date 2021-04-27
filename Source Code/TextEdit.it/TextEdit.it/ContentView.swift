@@ -30,7 +30,8 @@ struct ContentView: View {
         bcf.countStyle = .file
         return bcf
     }()
-    let fileURL: URL
+    @State var fileURL: URL
+    @State var showNoURLWarning = false
     var body: some View {
         NavigationView {
             List {
@@ -96,10 +97,18 @@ struct ContentView: View {
                         Text("\(fileTypeAttribute)")
                 }
                 }
-                Button(action: {getAttributes()}) {
-                    Text("Update")
+                if showNoURLWarning == true {
+                    Text("􀅴 ").foregroundColor(.orange) + Text("Please Save")
+                    Text("Or Press Update")
+                    Text("To Get Metadata.")
                 }
-                .padding(.horizontal)
+                Button(action: {fileURL = NSDocumentController().currentDocument?.fileURL ?? URL(string: "/")!
+                            getAttributes()
+                    self.showNoURLWarning = false
+                }) {
+                        Text("Update")
+                    }
+                    .padding(.horizontal)
             }
             .listStyle(SidebarListStyle())
             GeometryReader { reader in
@@ -113,15 +122,19 @@ struct ContentView: View {
                   .onLoadSuccess {
                     print("Loaded")
                   }
+                    .onContentChange { newCodeBlock in
+                        if fileURL == URL(string: "/") {
+                            self.showNoURLWarning = true
+                        } else {
+                            self.showNoURLWarning = false
+                        }
+                    }
                   .onLoadFail { error in
                     print("Load failed : \(error.localizedDescription)")
                   }
                   .frame(height: reader.size.height)
               }.frame(height: reader.size.height)
             }
-        }
-        .onAppear {
-            print("Name: \(fileURL.lastPathComponent), Size: \(fileURL.fileSizeString), Type: \(fileURL.fileType), Date: \(fileURL.creationDate ?? Date()), Extension: \(fileURL.pathExtension), Modification: \(fileURL.modificationDate ?? Date()), Owner: \(fileURL.fileOwner)")
         }
             .touchBar {
                 Button(action: {NSDocumentController().newDocument(Any?.self)}) {

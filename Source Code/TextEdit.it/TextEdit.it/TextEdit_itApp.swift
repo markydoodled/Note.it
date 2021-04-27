@@ -15,7 +15,7 @@ struct TextEdit_itApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         DocumentGroup(newDocument: TextEdit_itDocument()) { file in
-            ContentView(document: file.$document, fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: "", fileURL: (NSDocumentController().currentDocument?.fileURL ?? URL(string: "/Users/markhoward/Downloads/Test.textedit"))!)
+            ContentView(document: file.$document, fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: "", fileURL: URL(string: "/")!)
                 .frame(minWidth: 850, idealWidth: .infinity, maxWidth: .infinity, minHeight: 400, idealHeight: .infinity, maxHeight: .infinity, alignment: .center)
         }
         /* .commands {
@@ -216,6 +216,10 @@ class AppMenu: NSMenu {
         printItem.setShortcut(for: .printCommand)
         fileMenu2.addItem(printItem)
         
+        fileMenu2.addItem(NSMenuItem.separator())
+        
+        fileMenu2.addItem(NSDocumentController().standardShareMenuItem())
+        
         items = [mainMenu, fileMenuItem, editMenu, viewMenu, windowMenu, helpMenu]
         NSApplication.shared.helpMenu = helpMenu.submenu
         NSApplication.shared.windowsMenu = windowMenu.submenu
@@ -267,7 +271,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     @objc
     func printShortcutAction(_ sender: NSMenuItem) {
-        let printingView = NSHostingView(rootView: ContentView(document: .constant(TextEdit_itDocument()), fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: "", fileURL: (NSDocument().presentedItemURL ?? URL(string: "/Users/markhoward/Downloads/Test.textedit"))!))
+         let printingView = NSHostingView(rootView: ContentView(document: .constant(TextEdit_itDocument()), fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: "", fileURL: (NSDocument().presentedItemURL ?? URL(string: "/Users/markhoward/Downloads/Test.textedit"))!))
         let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
         printView.string = printingView.rootView.document.text
         
@@ -286,7 +290,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         printOperation.showsProgressPanel = true
         printOperation.printPanel = printPanel
         printOperation.run()
-        
     }
     @objc
     func duplicateShortcutAction(_ sender: NSMenuItem) {
@@ -321,16 +324,6 @@ self.init(title: string, action: nil, keyEquivalent: "")
 self.submenu = NSMenu()
 self.submenu?.items = submenuItems
 }
-}
-
-struct PreferencesView: View {
-    var body: some View {
-        Preferences.Container(contentWidth: 450.0) {
-            Preferences.Section(title: "") {
-                Text("Test")
-            }
-        }
-    }
 }
 
 extension Preferences.PaneIdentifier {
