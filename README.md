@@ -12,12 +12,12 @@ This is a simple text editor for Mac that is mostly built with SwiftUI. It is de
  - Support for editor themes
  - Ability to change some commands to custom key bindings
  - Support for both Intel and Apple Silicon Macs
-
-## **Features To Be Implemented**
-
  - More file formats
  - Export to other file formats
  - In-app Finder metadata integration for the document
+
+## **Features To Be Implemented**
+
  - An iOS/iPadOS version (possibly)
 
 ## **Things To Note**
