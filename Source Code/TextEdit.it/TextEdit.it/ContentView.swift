@@ -149,9 +149,9 @@ struct ContentView: View {
                 Button(action: {copyToClipBoard(textToCopy: document.text)}) {
                     Image(systemName: "doc.on.doc")
                 }
-                Button(action: {printDoc()}) {
+                /* Button(action: {printDoc()}) {
                     Image(systemName: "printer")
-                }
+                } */
                 Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
                     Image(systemName: "folder")
                 }
@@ -164,23 +164,45 @@ struct ContentView: View {
                     Button(action: {toggleSidebar()}) {
                         Image(systemName: "sidebar.left")
                     }
+                    .help(Text("Toggle Sidebar"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSDocumentController().newDocument(Any?.self)}) {
                         Image(systemName: "plus")
                     }
+                    .help(Text("New"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSDocumentController().openDocument(Any?.self)}) {
                         Image(systemName: "doc")
                     }
+                    .help(Text("Open"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSApp.sendAction(#selector(NSDocument.save(_:)), to: nil, from: self)}) {
                         Image(systemName: "square.and.arrow.down")
                     }
+                    .help(Text("Save"))
                 }
                 ToolbarItem(placement: .status) {
+                    Button(action: {copyToClipBoard(textToCopy: document.text)}) {
+                        Image(systemName: "doc.on.doc")
+                    }
+                    .help(Text("Copy"))
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
+                        Image(systemName: "folder")
+                    }
+                    .help(Text("Move To..."))
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
+                        Image(systemName: "doc.badge.plus")
+                    }
+                    .help(Text("Duplicate"))
+                }
+                /* ToolbarItem(placement: .status) {
                     Menu {
                         Button(action: {copyToClipBoard(textToCopy: document.text)}) {
                             Text("􀉁 Copy")
@@ -197,7 +219,7 @@ struct ContentView: View {
                     } label: {
                         Label("More", systemImage: "ellipsis.circle")
                 }
-                }
+                } */
             }
     }
     func getAttributes() {
@@ -231,38 +253,209 @@ struct ContentView: View {
 
             let printOp = NSPrintOperation(view: printView, printInfo: printInfo)
         printOp.printPanel = printPanel
+        printOp.showsPrintPanel = true
+        printOp.showsProgressPanel = true
             printOp.run()
     }
-    func attributes() {
-        let fileManager = FileManager.default
-
-        if let documentsURLs = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
-            do {
-                let fileNames = try fileManager.contentsOfDirectory(atPath: documentsURLs.path)
-
-                for fileName in fileNames {
-                    let fileURL = documentsURLs.appendingPathComponent(fileName)
-
-                    let fileAttribute = try fileManager.attributesOfItem(atPath: fileURL.path)
-                    let fileSize = fileAttribute[FileAttributeKey.size] as! Int64
-                    let fileType = fileAttribute[FileAttributeKey.type] as! String
-                    let filecreationDate = fileAttribute[FileAttributeKey.creationDate] as! Date
-                    let filemodificationDate = fileAttribute[FileAttributeKey.modificationDate] as! Date
-                    let fileOwner = fileAttribute[FileAttributeKey.ownerAccountName] as! String
-                    let fileExtension = fileURL.pathExtension;
-
-                    print("Name: \(fileName), Size: \(fileSize), Type: \(fileType), Date: \(filecreationDate), Extension: \(fileExtension), Modification: \(filemodificationDate), Owner: \(fileOwner)")
-                    fileTypeAttribute = fileType
-                    fileSizeAttribute = fileSize
-                    fileTitleAtribute = fileName
-                    fileCreatedAttribute = filecreationDate
-                    fileModifiedAttribute = filemodificationDate
-                    fileExtensionAttribute = fileExtension
-                    fileOwnerAttribute = fileOwner
-                }
-            } catch {
-                print("Error: \(error)")
+    class AppMenu: NSMenu {
+        private lazy var applicationName = ProcessInfo.processInfo.processName
+        @objc
+        func openPreferences(_ sender: NSMenuItem) {
+            AppDelegate().preferencesWindowController.show()
+        }
+        @objc
+        func revertToShortcutAction(_ sender: NSMenuItem) {
+            let doc = NSDocument()
+            NSApp.sendAction(#selector(doc.browseVersions(_:)), to: nil, from: self)
+        }
+        @objc
+        func toggleSidebar() {
+                NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
             }
+        @objc
+        func newShortcutAction(_ sender: NSMenuItem) {
+            let doc = NSDocumentController()
+            doc.newDocument(Any?.self)
+        }
+
+        @objc
+        func openShortcutAction(_ sender: NSMenuItem) {
+            let doc = NSDocumentController()
+            doc.openDocument(Any?.self)
+        }
+
+        @objc
+        func saveShortcutAction(_ sender: NSMenuItem) {
+            let doc = NSDocument()
+            NSApp.sendAction(#selector(doc.save(_:)), to: nil, from: self)
+        }
+        /* @objc
+        func printShortcutAction(_ sender: NSMenuItem) {
+             let printingView = NSHostingView(rootView: ContentView(document: .constant(TextEdit_itDocument()), fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: "", fileURL: URL(string: "/")!))
+            let printView = NSTextView(frame: NSRect(x: 0, y: 0, width: 72*6, height: 72*8))
+            printView.string = printingView.rootView.document.text
+            
+            let printInfo = NSPrintInfo()
+            printInfo.bottomMargin = 72
+            printInfo.topMargin = 72
+            printInfo.leftMargin = 72
+            printInfo.rightMargin = 72
+            
+            let printPanel = NSPrintPanel()
+            printPanel.options = [.showsPageSetupAccessory, .showsCopies, .showsOrientation, .showsPageRange, .showsPaperSize, .showsPreview, .showsPrintSelection, .showsScaling]
+            
+            let printOperation = NSPrintOperation(view: printingView, printInfo: printInfo)
+            printOperation.view?.frame = .init(x: 0, y: 0, width: 500, height: 500)
+            printOperation.showsPrintPanel = true
+            printOperation.showsProgressPanel = true
+            printOperation.printPanel = printPanel
+            printOperation.run()
+        } */
+        @objc
+        func duplicateShortcutAction(_ sender: NSMenuItem) {
+            let doc = NSDocument()
+            NSApp.sendAction(#selector(doc.duplicate(_:)), to: nil, from: self)
+        }
+        @objc
+        func moveToShortcutAction(_ sender: NSMenuItem) {
+            let doc = NSDocument()
+            NSApp.sendAction(#selector(doc.move(_:)), to: nil, from: self)
+        }
+        @objc
+        func closeAction(_ sender: NSMenuItem) {
+            let window = NSWindow()
+            NSApp.sendAction(#selector(window.performClose(_:)), to: nil, from: self)
+        }
+        @objc
+        func renameAction(_ sender: NSMenuItem) {
+            let doc = NSDocumentController()
+            doc.currentDocument?.rename(Any?.self)
+        }
+        override init(title: String) {
+            super.init(title: title)
+            let mainMenu = NSMenuItem()
+            mainMenu.submenu = NSMenu(title: "MainMenu")
+            mainMenu.submenu?.items = [
+            NSMenuItem(title: "About \(applicationName)", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
+            NSMenuItem.separator(),
+                NSMenuItem(title: "Preferences...", action: #selector(openPreferences), keyEquivalent: ","),
+            NSMenuItem.separator(),
+            NSMenuItem(title: "Hide \(applicationName)", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h"),
+            NSMenuItem(title: "Hide Others", target: self, action: #selector(NSApplication.hideOtherApplications(_:)), keyEquivalent: "h", modifier: .init(arrayLiteral: [.command, .option])),
+            NSMenuItem(title: "Show All", action: #selector(NSApplication.unhideAllApplications(_:)), keyEquivalent: ""),
+            NSMenuItem.separator(),
+            NSMenuItem(title: "Quit \(applicationName)", action: #selector(NSApplication.shared.terminate(_:)), keyEquivalent: "q")
+            ]
+            let editMenu = NSMenuItem()
+            editMenu.submenu = NSMenu(title: "Edit")
+            editMenu.submenu?.items = [
+            NSMenuItem(title: "Undo", action: #selector(UndoManager.undo), keyEquivalent: "z"),
+            NSMenuItem(title: "Redo", action: #selector(UndoManager.redo), keyEquivalent: "Z"),
+            NSMenuItem.separator(),
+            NSMenuItem(title: "Cut", action: #selector(NSText.cut(_:)), keyEquivalent: "x"),
+            NSMenuItem(title: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c"),
+            NSMenuItem(title: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v"),
+            NSMenuItem.separator(),
+            NSMenuItem(title: "Select All", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a"),
+            ]
+            let viewMenu = NSMenuItem()
+            viewMenu.submenu = NSMenu(title: "View")
+            viewMenu.submenu?.items = [
+                NSMenuItem(title: "Toggle Sidebar", action: #selector(toggleSidebar), keyEquivalent: "s", modifier: .init(arrayLiteral: [.command, .option]))
+            ]
+            let windowMenu = NSMenuItem()
+            windowMenu.submenu = NSMenu(title: "Window")
+            windowMenu.submenu?.items = [
+             NSMenuItem(title: "Minmize", action: #selector(NSWindow.miniaturize(_:)), keyEquivalent: "m"),
+            NSMenuItem(title: "Zoom", action: #selector(NSWindow.performZoom(_:)), keyEquivalent: ""),
+            NSMenuItem.separator(),
+                NSMenuItem(title: "Move Tab to New Window", action: #selector(NSWindow.moveTabToNewWindow(_:)), keyEquivalent: ""),
+                NSMenuItem(title: "Merge All Windows", action: #selector(NSWindow.mergeAllWindows(_:)), keyEquivalent: ""),
+                NSMenuItem.separator(),
+            NSMenuItem(title: "Bring All to Front", action: #selector(NSApplication.arrangeInFront(_:)), keyEquivalent: ""),
+            ]
+            let helpMenu = NSMenuItem()
+            helpMenu.submenu = NSMenu(title: "Help")
+            helpMenu.submenu?.items = [
+                NSMenuItem(title: "TextEdit.it Help", action: #selector(NSApplication.showHelp(_:)), keyEquivalent: ""),
+            ]
+            
+            let fileMenuItem = NSMenuItem()
+
+            let fileMenu2 = NSMenu()
+            fileMenu2.title = "File"
+            fileMenuItem.submenu = fileMenu2
+            
+
+            let newItem = NSMenuItem()
+            newItem.title = "New"
+            newItem.action = #selector(newShortcutAction)
+            newItem.setShortcut(for: .newCommand)
+            fileMenu2.addItem(newItem)
+
+            let openItem = NSMenuItem()
+            openItem.title = "Open"
+            openItem.action = #selector(openShortcutAction)
+            openItem.setShortcut(for: .openCommand)
+            fileMenu2.addItem(openItem)
+            
+
+            fileMenu2.addItem(NSMenuItem.separator())
+            
+            let closeItem = NSMenuItem()
+            closeItem.title = "Close"
+            closeItem.action = #selector(closeAction)
+            closeItem.setShortcut(for: .closeCommand)
+            fileMenu2.addItem(closeItem)
+            
+            let saveItem = NSMenuItem()
+            saveItem.title = "Save"
+            saveItem.action = #selector(saveShortcutAction)
+            saveItem.setShortcut(for: .saveCommand)
+            fileMenu2.addItem(saveItem)
+            
+            let duplicateItem = NSMenuItem()
+            duplicateItem.title = "Duplicate"
+            duplicateItem.action = #selector(duplicateShortcutAction)
+            duplicateItem.setShortcut(for: .duplicateCommand)
+            fileMenu2.addItem(duplicateItem)
+            
+            let renameItem = NSMenuItem()
+            renameItem.title = "Rename..."
+            renameItem.action = #selector(renameAction)
+            renameItem.setShortcut(for: .renameCommand)
+            fileMenu2.addItem(renameItem)
+            
+            let moveToItem = NSMenuItem()
+            moveToItem.title = "Move To..."
+            moveToItem.action = #selector(moveToShortcutAction)
+            moveToItem.setShortcut(for: .moveToCommand)
+            fileMenu2.addItem(moveToItem)
+            
+            let revertToItem = NSMenuItem()
+            revertToItem.title = "Revert To..."
+            revertToItem.action = #selector(revertToShortcutAction)
+            revertToItem.setShortcut(for: .revertToCommand)
+            fileMenu2.addItem(revertToItem)
+            
+            fileMenu2.addItem(NSMenuItem.separator())
+            
+            /* let printItem = NSMenuItem()
+            printItem.title = "Print"
+            printItem.action = #selector(printShortcutAction)
+            printItem.setShortcut(for: .printCommand)
+            fileMenu2.addItem(printItem)
+            
+            fileMenu2.addItem(NSMenuItem.separator()) */
+            
+            fileMenu2.addItem(NSDocumentController().standardShareMenuItem())
+            
+            items = [mainMenu, fileMenuItem, editMenu, viewMenu, windowMenu, helpMenu]
+            NSApplication.shared.helpMenu = helpMenu.submenu
+            NSApplication.shared.windowsMenu = windowMenu.submenu
+        }
+        required init(coder: NSCoder) {
+            super.init(coder: coder)
         }
     }
 }
@@ -270,48 +463,6 @@ struct ContentView: View {
 public func toggleSidebar() {
         NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
     }
-
-struct SharingsPicker: NSViewRepresentable {
-    @Binding var isPresented: Bool
-    var sharingItems: [Any] = []
-
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        return view
-    }
-
-    func updateNSView(_ nsView: NSView, context: Context) {
-        if isPresented {
-            let picker = NSSharingServicePicker(items: sharingItems)
-            picker.delegate = context.coordinator
-
-            // !! MUST BE CALLED IN ASYNC, otherwise blocks update
-            DispatchQueue.main.async {
-                picker.show(relativeTo: .zero, of: nsView, preferredEdge: .minY)
-            }
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(owner: self)
-    }
-
-    class Coordinator: NSObject, NSSharingServicePickerDelegate {
-        let owner: SharingsPicker
-
-        init(owner: SharingsPicker) {
-            self.owner = owner
-        }
-
-        func sharingServicePicker(_ sharingServicePicker: NSSharingServicePicker, didChoose service: NSSharingService?) {
-
-            // do here whatever more needed here with selected service
-
-            sharingServicePicker.delegate = nil   // << cleanup
-            self.owner.isPresented = false        // << dismiss
-        }
-    }
-}
 
 private func copyToClipBoard(textToCopy: String) {
     let pasteBoard = NSPasteboard.general

@@ -52,7 +52,7 @@ struct KeyboardSettings: View {
                             Spacer()
                         }
                     }
-                    VStack {
+                    /* VStack {
                         Text("Print Command")
                             .padding(.vertical)
                         HStack {
@@ -60,7 +60,7 @@ struct KeyboardSettings: View {
                             KeyboardShortcuts.Recorder(for: .printCommand)
                             Spacer()
                         }
-                    }
+                    } */
                     VStack {
                         Text("Duplicate Command")
                             .padding(.vertical)
@@ -70,8 +70,6 @@ struct KeyboardSettings: View {
                             Spacer()
                         }
                     }
-                }
-                VStack {
                     VStack {
                         Text("Move To... Command")
                             .padding(.vertical)
@@ -81,6 +79,8 @@ struct KeyboardSettings: View {
                             Spacer()
                         }
                     }
+                }
+                VStack {
                     VStack {
                         Text("Rename... Command")
                             .padding(.vertical)
@@ -1174,6 +1174,22 @@ struct ThemesSettings: View {
                     Text("yaml")
                 }
                 .tag(56)
+                    Button(action: {}) {
+                        Text("dart")
+                    }
+                    .tag(57)
+                    Button(action: {}) {
+                        Text("ntriples")
+                    }
+                    .tag(58)
+                    Button(action: {}) {
+                        Text("sparql")
+                    }
+                    .tag(59)
+                    Button(action: {}) {
+                        Text("turtle")
+                    }
+                    .tag(60)
                 }
             }
             .onChange(of: selectedSyntax, perform: { value in
@@ -1346,6 +1362,18 @@ struct ThemesSettings: View {
                 if value == 56 {
                     self.syntax = CodeMode.yaml
                 }
+                if value == 57 {
+                    self.syntax = CodeMode.dart
+                }
+                if value == 58 {
+                    self.syntax = CodeMode.ntriples
+                }
+                if value == 59 {
+                    self.syntax = CodeMode.sparql
+                }
+                if value == 60 {
+                    self.syntax = CodeMode.turtle
+                }
             })
         }
         .padding(20)
@@ -1362,7 +1390,7 @@ struct MiscSettings: View {
                         Spacer()
                         VStack {
             Text("Version: 1.1")
-            Text("Build: 9")
+            Text("Build: 10")
                         }
                         Spacer()
                     }
@@ -2785,7 +2813,7 @@ extension KeyboardShortcuts.Name {
     static let newCommand = Self("newCommand", default: .init(.n, modifiers: [.command]))
     static let openCommand = Self("openCommand", default: .init(.o, modifiers: [.command]))
     static let saveCommand = Self("saveCommand", default: .init(.s, modifiers: [.command]))
-    static let printCommand = Self("printCommand", default: .init(.p, modifiers: [.command]))
+    //static let printCommand = Self("printCommand", default: .init(.p, modifiers: [.command]))
     static let duplicateCommand = Self("duplicateCommand", default: .init(.s, modifiers: [.command, .shift]))
     static let moveToCommand = Self("moveToCommand")
     static let renameCommand = Self("renameCommand")
