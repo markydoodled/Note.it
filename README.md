@@ -5,7 +5,7 @@ This is a simple text editor for Mac that is mostly built with SwiftUI. It is de
 
 ## **Latest Version**
 
-To download the latest stable version of the app, click the link below:
+To download the latest stable version of the app, click the link:
 [Latest Release](https://github.com/markydoodled/TextEdit.it/releases/download/v1.1/TextEdit.it.app.zip)
 
 ## **Features**
