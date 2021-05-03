@@ -34,7 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D5130CDF25CEDE42001256A2 /* TextEdit.it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextEdit.it.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5130CDF25CEDE42001256A2 /* Note.it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Note.it.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5130CE225CEDE42001256A2 /* TextEdit_itApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit_itApp.swift; sourceTree = "<group>"; };
 		D5130CE425CEDE42001256A2 /* TextEdit_itDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit_itDocument.swift; sourceTree = "<group>"; };
 		D5130CE625CEDE42001256A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		D5130CE025CEDE42001256A2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D5130CDF25CEDE42001256A2 /* TextEdit.it.app */,
+				D5130CDF25CEDE42001256A2 /* Note.it.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,9 +101,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D5130CDE25CEDE42001256A2 /* TextEdit.it */ = {
+		D5130CDE25CEDE42001256A2 /* Note.it */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5130CF125CEDE44001256A2 /* Build configuration list for PBXNativeTarget "TextEdit.it" */;
+			buildConfigurationList = D5130CF125CEDE44001256A2 /* Build configuration list for PBXNativeTarget "Note.it" */;
 			buildPhases = (
 				D5130CDB25CEDE42001256A2 /* Sources */,
 				D5130CDC25CEDE42001256A2 /* Frameworks */,
@@ -114,14 +114,14 @@
 			);
 			dependencies = (
 			);
-			name = TextEdit.it;
+			name = Note.it;
 			packageProductDependencies = (
 				D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */,
 				D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */,
 				D50C75FC262DE1E400561E7A /* Preferences */,
 			);
 			productName = TextEdit.it;
-			productReference = D5130CDF25CEDE42001256A2 /* TextEdit.it.app */;
+			productReference = D5130CDF25CEDE42001256A2 /* Note.it.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +156,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D5130CDE25CEDE42001256A2 /* TextEdit.it */,
+				D5130CDE25CEDE42001256A2 /* Note.it */,
 			);
 		};
 /* End PBXProject section */
@@ -311,7 +311,7 @@
 				CODE_SIGN_ENTITLEMENTS = TextEdit.it/TextEdit_it.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -322,7 +322,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -337,7 +337,7 @@
 				CODE_SIGN_ENTITLEMENTS = TextEdit.it/TextEdit_it.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -348,7 +348,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -367,7 +367,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5130CF125CEDE44001256A2 /* Build configuration list for PBXNativeTarget "TextEdit.it" */ = {
+		D5130CF125CEDE44001256A2 /* Build configuration list for PBXNativeTarget "Note.it" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5130CF225CEDE44001256A2 /* Debug */,

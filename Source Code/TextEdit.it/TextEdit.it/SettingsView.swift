@@ -1389,8 +1389,8 @@ struct MiscSettings: View {
                     HStack {
                         Spacer()
                         VStack {
-            Text("Version: 1.1")
-            Text("Build: 10")
+            Text("Version: 1.2")
+            Text("Build: 2")
                         }
                         Spacer()
                     }
@@ -2803,7 +2803,7 @@ class SendEmail: NSObject {
     static func send() {
         let service = NSSharingService(named: NSSharingService.Name.composeEmail)!
         service.recipients = ["markhoward2005@gmail.com"]
-        service.subject = "TextEdit.it Feedback"
+        service.subject = "Note.it Feedback"
 
         service.perform(withItems: ["Please Fill Out All Necessary Sections:", "Report A Bug - ", "Rate The App - ", "Suggest An Improvment - "])
     }

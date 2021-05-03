@@ -377,7 +377,7 @@ struct ContentView: View {
             let helpMenu = NSMenuItem()
             helpMenu.submenu = NSMenu(title: "Help")
             helpMenu.submenu?.items = [
-                NSMenuItem(title: "TextEdit.it Help", action: #selector(NSApplication.showHelp(_:)), keyEquivalent: ""),
+                NSMenuItem(title: "Note.it Help", action: #selector(NSApplication.showHelp(_:)), keyEquivalent: ""),
             ]
             
             let fileMenuItem = NSMenuItem()
