@@ -1,7 +1,7 @@
 # TextEdit.it
 **About**
 
-This is a simple text editor for Mac that is mostly built with SwiftUI. It is designed to take up less resources and less storage, and be used in small quick bursts of writing or note taking. It uses its own proprietary .textedit document format. Other text formats will be implemented soon.
+This is a simple text editor for Mac that is mostly built with SwiftUI. It is designed to take up less resources and less storage, and be used in small quick bursts of writing or note taking. It uses its own proprietary .textedit document format (similar to .txt format).
 
 ## **Features**
 
