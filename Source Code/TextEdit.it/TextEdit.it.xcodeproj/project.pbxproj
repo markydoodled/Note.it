@@ -17,6 +17,15 @@
 		D559AB75261CBFED00C6E8FC /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */; };
 		D559AB78261CC34400C6E8FC /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */; };
 		D559AB79261CC34400C6E8FC /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D5762E05264042110069A17F /* TextEdit_it_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E04264042110069A17F /* TextEdit_it_iOSApp.swift */; };
+		D5762E07264042110069A17F /* TextEdit_it_iOSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E06264042110069A17F /* TextEdit_it_iOSDocument.swift */; };
+		D5762E09264042110069A17F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E08264042110069A17F /* ContentView.swift */; };
+		D5762E0B264042140069A17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5762E0A264042140069A17F /* Assets.xcassets */; };
+		D5762E0E264042140069A17F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5762E0D264042140069A17F /* Preview Assets.xcassets */; };
+		D5762E17264042420069A17F /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D5762E16264042420069A17F /* CodeMirror-SwiftUI */; };
+		D5762E18264042420069A17F /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D5762E16264042420069A17F /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D5762E1E2640484D0069A17F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E1C264048490069A17F /* SettingsView.swift */; };
+		D5762E202640505D0069A17F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5762E1F2640505D0069A17F /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +36,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D559AB79261CC34400C6E8FC /* CodeMirror-SwiftUI in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5762E19264042420069A17F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D5762E18264042420069A17F /* CodeMirror-SwiftUI in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,6 +63,15 @@
 		D5130CED25CEDE44001256A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5130CEE25CEDE44001256A2 /* TextEdit_it.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TextEdit_it.entitlements; sourceTree = "<group>"; };
 		D550CE2A25E2AF52005FA8BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D5762E02264042110069A17F /* Note.it iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Note.it iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5762E04264042110069A17F /* TextEdit_it_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit_it_iOSApp.swift; sourceTree = "<group>"; };
+		D5762E06264042110069A17F /* TextEdit_it_iOSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit_it_iOSDocument.swift; sourceTree = "<group>"; };
+		D5762E08264042110069A17F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D5762E0A264042140069A17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5762E0D264042140069A17F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D5762E0F264042140069A17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5762E1C264048490069A17F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D5762E1F2640505D0069A17F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +85,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D5762DFF264042110069A17F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5762E17264042420069A17F /* CodeMirror-SwiftUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -63,7 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				D5130CE125CEDE42001256A2 /* TextEdit.it */,
+				D5762E03264042110069A17F /* TextEdit.it iOS */,
 				D5130CE025CEDE42001256A2 /* Products */,
+				D5762E132640423F0069A17F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				D5130CDF25CEDE42001256A2 /* Note.it.app */,
+				D5762E02264042110069A17F /* Note.it iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,6 +136,36 @@
 				D5130CEB25CEDE44001256A2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D5762E03264042110069A17F /* TextEdit.it iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D5762E04264042110069A17F /* TextEdit_it_iOSApp.swift */,
+				D5762E06264042110069A17F /* TextEdit_it_iOSDocument.swift */,
+				D5762E08264042110069A17F /* ContentView.swift */,
+				D5762E0A264042140069A17F /* Assets.xcassets */,
+				D5762E0F264042140069A17F /* Info.plist */,
+				D5762E0C264042140069A17F /* Preview Content */,
+				D5762E1C264048490069A17F /* SettingsView.swift */,
+				D5762E1F2640505D0069A17F /* Settings.bundle */,
+			);
+			path = "TextEdit.it iOS";
+			sourceTree = "<group>";
+		};
+		D5762E0C264042140069A17F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D5762E0D264042140069A17F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D5762E132640423F0069A17F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +194,27 @@
 			productReference = D5130CDF25CEDE42001256A2 /* Note.it.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D5762E01264042110069A17F /* Note.it iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5762E12264042140069A17F /* Build configuration list for PBXNativeTarget "Note.it iOS" */;
+			buildPhases = (
+				D5762DFE264042110069A17F /* Sources */,
+				D5762DFF264042110069A17F /* Frameworks */,
+				D5762E00264042110069A17F /* Resources */,
+				D5762E19264042420069A17F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Note.it iOS";
+			packageProductDependencies = (
+				D5762E16264042420069A17F /* CodeMirror-SwiftUI */,
+			);
+			productName = "TextEdit.it iOS";
+			productReference = D5762E02264042110069A17F /* Note.it iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -134,6 +225,9 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					D5130CDE25CEDE42001256A2 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					D5762E01264042110069A17F = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -157,6 +251,7 @@
 			projectRoot = "";
 			targets = (
 				D5130CDE25CEDE42001256A2 /* Note.it */,
+				D5762E01264042110069A17F /* Note.it iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -171,6 +266,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D5762E00264042110069A17F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5762E0E264042140069A17F /* Preview Assets.xcassets in Resources */,
+				D5762E202640505D0069A17F /* Settings.bundle in Resources */,
+				D5762E0B264042140069A17F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -182,6 +287,17 @@
 				D550CE2B25E2AF52005FA8BB /* SettingsView.swift in Sources */,
 				D5130CE325CEDE42001256A2 /* TextEdit_itApp.swift in Sources */,
 				D5130CE725CEDE42001256A2 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5762DFE264042110069A17F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5762E07264042110069A17F /* TextEdit_it_iOSDocument.swift in Sources */,
+				D5762E1E2640484D0069A17F /* SettingsView.swift in Sources */,
+				D5762E05264042110069A17F /* TextEdit_it_iOSApp.swift in Sources */,
+				D5762E09264042110069A17F /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +471,57 @@
 			};
 			name = Release;
 		};
+		D5762E10264042140069A17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = ZWASU9HFBU;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "TextEdit.it iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D5762E11264042140069A17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = ZWASU9HFBU;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "TextEdit.it iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -372,6 +539,15 @@
 			buildConfigurations = (
 				D5130CF225CEDE44001256A2 /* Debug */,
 				D5130CF325CEDE44001256A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5762E12264042140069A17F /* Build configuration list for PBXNativeTarget "Note.it iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5762E10264042140069A17F /* Debug */,
+				D5762E11264042140069A17F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -417,6 +593,11 @@
 			productName = KeyboardShortcuts;
 		};
 		D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
+			productName = "CodeMirror-SwiftUI";
+		};
+		D5762E16264042420069A17F /* CodeMirror-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
 			productName = "CodeMirror-SwiftUI";
