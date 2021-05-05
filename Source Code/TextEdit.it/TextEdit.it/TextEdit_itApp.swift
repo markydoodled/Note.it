@@ -34,8 +34,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesWindowController.show()
     }
     func applicationDidFinishLaunching(_ notification: Notification) {
-        let menu = ContentView.AppMenu()
-        NSApp.mainMenu = menu
+      DispatchQueue.main.async(){
+        NSApp.mainMenu = ContentView.AppMenu()
+      }
     }
     @objc
     func revertToShortcutAction(_ sender: NSMenuItem) {
