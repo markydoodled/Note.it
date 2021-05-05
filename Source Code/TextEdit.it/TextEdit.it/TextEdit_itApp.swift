@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesWindowController.show()
     }
     func applicationDidFinishLaunching(_ notification: Notification) {
-      DispatchQueue.main.async()
+        DispatchQueue.main.async() {
         NSApp.mainMenu = ContentView.AppMenu()
       }
     }
