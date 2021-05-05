@@ -12,7 +12,6 @@ import KeyboardShortcuts
 
 struct ContentView: View {
     @Binding var document: TextEdit_itDocument
-    @State private var text = ""
     @State var editor = EditorSettings()
     @State var themes = ThemesSettings()
     @State var fileTypeAttribute: String
