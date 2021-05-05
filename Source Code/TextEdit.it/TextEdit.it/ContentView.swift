@@ -194,7 +194,7 @@ struct ContentView: View {
                     Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
                         Image(systemName: "folder")
                     }
-                    .help(Text("Move To..."))
+                    .help(Text("Move To…"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
@@ -211,7 +211,7 @@ struct ContentView: View {
                             Text("􀎚 Print")
                         }
                         Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
-                            Text("􀈕 Move To...")
+                            Text("􀈕 Move To…")
                         }
                         Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
                             Text("􀣗 Duplicate")
@@ -338,7 +338,7 @@ struct ContentView: View {
             mainMenu.submenu?.items = [
             NSMenuItem(title: "About \(applicationName)", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
             NSMenuItem.separator(),
-                NSMenuItem(title: "Preferences...", action: #selector(openPreferences), keyEquivalent: ","),
+                NSMenuItem(title: "Preferences…", action: #selector(openPreferences), keyEquivalent: ","),
             NSMenuItem.separator(),
             NSMenuItem(title: "Hide \(applicationName)", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h"),
             NSMenuItem(title: "Hide Others", target: self, action: #selector(NSApplication.hideOtherApplications(_:)), keyEquivalent: "h", modifier: .init(arrayLiteral: [.command, .option])),
@@ -421,19 +421,19 @@ struct ContentView: View {
             fileMenu2.addItem(duplicateItem)
             
             let renameItem = NSMenuItem()
-            renameItem.title = "Rename..."
+            renameItem.title = "Rename…"
             renameItem.action = #selector(renameAction)
             renameItem.setShortcut(for: .renameCommand)
             fileMenu2.addItem(renameItem)
             
             let moveToItem = NSMenuItem()
-            moveToItem.title = "Move To..."
+            moveToItem.title = "Move To…"
             moveToItem.action = #selector(moveToShortcutAction)
             moveToItem.setShortcut(for: .moveToCommand)
             fileMenu2.addItem(moveToItem)
             
             let revertToItem = NSMenuItem()
-            revertToItem.title = "Revert To..."
+            revertToItem.title = "Revert To…"
             revertToItem.action = #selector(revertToShortcutAction)
             revertToItem.setShortcut(for: .revertToCommand)
             fileMenu2.addItem(revertToItem)
