@@ -71,7 +71,7 @@ struct KeyboardSettings: View {
                         }
                     }
                     VStack {
-                        Text("Move To... Command")
+                        Text("Move To… Command")
                             .padding(.vertical)
                         HStack {
                             Spacer()
@@ -82,7 +82,7 @@ struct KeyboardSettings: View {
                 }
                 VStack {
                     VStack {
-                        Text("Rename... Command")
+                        Text("Rename… Command")
                             .padding(.vertical)
                         HStack {
                             Spacer()
@@ -91,7 +91,7 @@ struct KeyboardSettings: View {
                         }
                     }
                     VStack {
-                        Text("Revert To... Command")
+                        Text("Revert To… Command")
                             .padding(.vertical)
                         HStack {
                             Spacer()
@@ -1487,7 +1487,7 @@ struct MiscSettings: View {
                     }
                     VStack {
                         VStack {
-                            Text("Move To... Command")
+                            Text("Move To… Command")
                                 .padding(.vertical)
                             HStack {
                                 Spacer()
@@ -1496,7 +1496,7 @@ struct MiscSettings: View {
                             }
                         }
                         VStack {
-                            Text("Rename... Command")
+                            Text("Rename… Command")
                                 .padding(.vertical)
                             HStack {
                                 Spacer()
@@ -1505,7 +1505,7 @@ struct MiscSettings: View {
                             }
                         }
                         VStack {
-                            Text("Revert To... Command")
+                            Text("Revert To… Command")
                                 .padding(.vertical)
                             HStack {
                                 Spacer()
