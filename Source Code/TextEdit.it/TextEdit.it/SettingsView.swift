@@ -111,7 +111,6 @@ struct EditorSettings: View {
     @AppStorage("lineWrapping") var lineWrapping = true
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
-    //@AppStorage("appTheme") var appTheme: String = "system"
     var body: some View {
         Form {
             VStack {
@@ -120,27 +119,6 @@ struct EditorSettings: View {
                     Stepper("Font Size: \(fontSize)", value: $fontSize, in: 1...120)
                     Spacer()
                 }
-                /* HStack {
-                    Text("Appearance: ")
-                    Button(action: {NSApp.appearance = NSAppearance(named: .aqua)
-                        appTheme = "light"
-                    }) {
-                    Text("Light")
-                    }
-                    .padding(.horizontal)
-                    Button(action: {NSApp.appearance = NSAppearance(named: .darkAqua)
-                        appTheme = "dark"
-                    }) {
-                    Text("Dark")
-                    }
-                    .padding(.trailing)
-                    Button(action: {NSApp.appearance = nil
-                        appTheme = "system"
-                    }) {
-                    Text("System")
-                    }
-                    .padding(.trailing)
-                } */
                 Toggle(isOn: $lineWrapping) {
                     Text("Line Wrapping")
                 }

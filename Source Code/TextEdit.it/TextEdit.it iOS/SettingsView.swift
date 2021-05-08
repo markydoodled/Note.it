@@ -7,46 +7,99 @@
 
 import SwiftUI
 import CodeMirror_SwiftUI
+import MessageUI
+
+struct MiscSettings: View {
+    @State var result: Result<MFMailComposeResult, Error>? = nil
+    @State var isShowingMailView = false
+    var body: some View {
+         List {
+            HStack {
+                Text("Version: ")
+                Spacer()
+                Text("1.2")
+            }
+            .padding(.horizontal)
+            HStack {
+                Text("Build: ")
+                Spacer()
+                Text("2")
+            }
+            .padding(.horizontal)
+            HStack {
+                Text("Feedback: ")
+                Spacer()
+                Button(action: {self.isShowingMailView.toggle()}) {
+                    Text("Send Some Feedback")
+                }
+                .sheet(isPresented: $isShowingMailView) {
+                    MailView(isShowing: self.$isShowingMailView, result: self.$result)
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+}
+
+struct MailView: UIViewControllerRepresentable {
+
+    @Binding var isShowing: Bool
+    @Binding var result: Result<MFMailComposeResult, Error>?
+
+    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+
+        @Binding var isShowing: Bool
+        @Binding var result: Result<MFMailComposeResult, Error>?
+
+        init(isShowing: Binding<Bool>,
+             result: Binding<Result<MFMailComposeResult, Error>?>) {
+            _isShowing = isShowing
+            _result = result
+        }
+
+        func mailComposeController(_ controller: MFMailComposeViewController,
+                                   didFinishWith result: MFMailComposeResult,
+                                   error: Error?) {
+            defer {
+                isShowing = false
+            }
+            guard error == nil else {
+                self.result = .failure(error!)
+                return
+            }
+            self.result = .success(result)
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(isShowing: $isShowing,
+                           result: $result)
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<MailView>) -> MFMailComposeViewController {
+        let vc = MFMailComposeViewController()
+        vc.mailComposeDelegate = context.coordinator
+        return vc
+    }
+
+    func updateUIViewController(_ uiViewController: MFMailComposeViewController,
+                                context: UIViewControllerRepresentableContext<MailView>) {
+
+    }
+}
+
+
 
 struct EditorSettings: View {
     @AppStorage("lineWrapping") var lineWrapping = true
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
-    //@AppStorage("appTheme") var appTheme: String = "system"
     var body: some View {
-        Form {
             List {
                 HStack {
                     Stepper("Font Size: \(fontSize)", value: $fontSize, in: 1...120)
                 }
                 .padding(.horizontal)
-               /* HStack {
-                    Text("Appearance: ")
-                    Spacer()
-                    Menu {
-                        Button(action: {//NSApp.appearance = NSAppearance(named: .aqua)
-                            appTheme = "light"
-                            UIApplication.shared.windows.forEach { window in
-                                window.overrideUserInterfaceStyle = .light}}) {
-                            Text("Light")
-                        }
-                            Button(action: {//NSApp.appearance = NSAppearance(named: .darkAqua)
-                                appTheme = "dark"
-                                UIApplication.shared.windows.forEach { window in
-                                    window.overrideUserInterfaceStyle = .dark}}) {
-                                Text("Dark")
-                            }
-                                Button(action: {//NSApp.appearance = nil
-                                    appTheme = "system"
-                                    UIApplication.shared.windows.forEach { window in
-                                        window.overrideUserInterfaceStyle = .unspecified}}) {
-                                    Text("System")
-                                }
-                    } label: {
-                        Text("Choose")
-                    }
-                }
-                .padding(.horizontal) */
                 HStack {
                     Toggle(isOn: $lineWrapping) {
                         Text("Line Wrapping")
@@ -62,18 +115,22 @@ struct EditorSettings: View {
                 }
                 .padding(.horizontal)
             }
-        }
     }
 }
 
 struct ThemesSettings: View {
-    @AppStorage("selectedSyntax") var selectedSyntax = 1
-    @AppStorage("selectedTheme") var selectedTheme = 0
+    @AppStorage("selectedSyntax") var selectedSyntax = 51
+    @AppStorage("selectedTheme") var selectedTheme = 80
     @AppStorage("syntax") var syntax: CodeMode = CodeMode.text
     @AppStorage("theme") var theme: CodeViewTheme = CodeViewTheme.zenburnesque
     var body: some View {
-        Form {
-            Picker(selection: $selectedTheme, label: Text("Theme: ")) {
+        List {
+            HStack {
+                Text("Theme: ")
+                Spacer()
+                Text("\(theme.rawValue)")
+                Spacer()
+            Picker(selection: $selectedTheme, label: Text("Choose")) {
                 Group {
                 Group {
                     Button(action: {}) {
@@ -527,6 +584,7 @@ struct ThemesSettings: View {
                     .tag(107)
                 }
             }
+            .pickerStyle(MenuPickerStyle())
             .onChange(of: selectedTheme) { (themeValue) in
                 print("Theme: \(themeValue)")
                 if themeValue == 1 {
@@ -851,7 +909,14 @@ struct ThemesSettings: View {
                     self.theme = CodeViewTheme.irWhite
                 }
             }
-            Picker(selection: $selectedSyntax, label: Text("Syntax Highlighting: ")) {
+        }
+            .padding(.horizontal)
+            HStack {
+                Text("Syntax Highlighting: ")
+                Spacer()
+                Text("\(syntax.rawValue)")
+                Spacer()
+            Picker(selection: $selectedSyntax, label: Text("Choose")) {
                 Group {
                 Button(action: {}) {
                     Text("apl")
@@ -1105,6 +1170,7 @@ struct ThemesSettings: View {
                     .tag(60)
                 }
             }
+            .pickerStyle(MenuPickerStyle())
             .onChange(of: selectedSyntax, perform: { value in
                 print("Syntax: \(value)")
                 if value == 1 {
@@ -1288,6 +1354,8 @@ struct ThemesSettings: View {
                     self.syntax = CodeMode.turtle
                 }
             })
+        }
+            .padding(.horizontal)
         }
     }
 }

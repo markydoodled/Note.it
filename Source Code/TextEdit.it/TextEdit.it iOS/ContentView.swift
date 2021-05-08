@@ -15,7 +15,8 @@ struct ContentView: View {
     @State var themes = ThemesSettings()
     @State var showNoURLWarning = false
     @State var fileURL: URL
-    @State var showingSettings = false
+    @AppStorage("selectedAppearance") var selectedAppearance = 3
+    @State var activeSheet: ActiveSheet?
     var body: some View {
         if horizontalSizeClass == .regular {
             GeometryReader { reader in
@@ -42,8 +43,53 @@ struct ContentView: View {
                   .frame(height: reader.size.height)
               }.frame(height: reader.size.height)
             }
+            .onAppear {
+                if selectedAppearance == 1 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .light}
+                } else if selectedAppearance == 2 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .dark}
+                } else {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .unspecified}
+                }
+            }
+            .onChange(of: selectedAppearance) { app in
+                if selectedAppearance == 1 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .light}
+                } else if selectedAppearance == 2 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .dark}
+                } else {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .unspecified}
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(action: {self.selectedAppearance = 1}) {
+                            Label("Light", systemImage: "sun.max.fill")
+                        }
+                        Button(action: {self.selectedAppearance = 2}) {
+                            Label("Dark", systemImage: "moon.fill")
+                        }
+                        Button(action: {self.selectedAppearance = 3}) {
+                            Label("System", systemImage: "laptopcomputer")
+                        }
+                    } label: {
+                        Label("Appearance", systemImage: "cloud.sun").font(.title3)
+                    }
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Button(action: {}) {
+                        Image(systemName: "gearshape")
+                    }
+                }
+            }
         } else {
-            NavigationView {
             GeometryReader { reader in
               ScrollView {
                 CodeView(theme: themes.theme,
@@ -68,35 +114,114 @@ struct ContentView: View {
                   .frame(height: reader.size.height)
               }.frame(height: reader.size.height)
             }
-        }
+            .onAppear {
+                if selectedAppearance == 1 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .light}
+                } else if selectedAppearance == 2 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .dark}
+                } else {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .unspecified}
+                }
+            }
+            .onChange(of: selectedAppearance) { app in
+                if selectedAppearance == 1 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .light}
+                } else if selectedAppearance == 2 {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .dark}
+                } else {
+                    UIApplication.shared.windows.forEach { window in
+                        window.overrideUserInterfaceStyle = .unspecified}
+                }
+            }
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(action: {self.selectedAppearance = 1}) {
+                            Label("Light", systemImage: "sun.max.fill")
+                        }
+                        Button(action: {self.selectedAppearance = 2}) {
+                            Label("Dark", systemImage: "moon.fill")
+                        }
+                        Button(action: {self.selectedAppearance = 3}) {
+                            Label("System", systemImage: "laptopcomputer")
+                        }
+                    } label: {
+                        Label("Appearance", systemImage: "cloud.sun").font(.title3)
+                    }
+                }
                 ToolbarItem(placement: .bottomBar) {
-                        Button(action: {self.showingSettings = true
-                            if showingSettings == true {
-                                print("Settings Is True")
-                            }
-                        }) {
+                    Button(action: {activeSheet = .settings}) {
                             Label("Settings", systemImage: "gearshape")
                         }
-                        .sheet(isPresented: $showingSettings) {
+                }
+                ToolbarItem(placement: .status) {
+                    Button(action: {copyToClipBoard(textToCopy: document.text)}) {
+                        Image(systemName: "doc.on.doc")
+                            .font(.title3)
+                    }
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Button(action: {activeSheet = .metadata}) {
+                        Image(systemName: "info.circle")
+                    }
+                }
+            }
+            .sheet(item: $activeSheet) { item in
+                        switch item {
+                        case .settings:
                             NavigationView {
+                                Form {
+                                    Section(header: Label("Editor", systemImage: "note.text")) {
                                 EditorSettings()
+                                }
+                                    Section(header: Label("Themes", systemImage: "paintbrush")) {
+                                        ThemesSettings()
+                                    }
+                                    Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
+                                        MiscSettings()
+                                    }
+                                }
                                 .navigationTitle("Settings")
                                     .toolbar {
                                         ToolbarItem(placement: .navigationBarTrailing) {
-                                            Button(action: {self.showingSettings = false
-                                                if showingSettings == false {
-                                                    print("false")
-                                                }
-                                            }) {
+                                            Button(action: {activeSheet = nil}) {
+                                                Text("Done")
+                                            }
+                                        }
+                                    }
+                            }
+                        case .metadata:
+                            NavigationView {
+                                Text("Test")
+                                    .navigationTitle("Metadata")
+                                    .toolbar {
+                                        ToolbarItem(placement: .navigationBarTrailing) {
+                                            Button(action: {activeSheet = nil}) {
                                                 Text("Done")
                                             }
                                         }
                                     }
                             }
                         }
-                }
-            }
+                    }
         }
+    }
+}
+
+private func copyToClipBoard(textToCopy: String) {
+    let paste = UIPasteboard.general
+    paste.string = textToCopy
+}
+
+enum ActiveSheet: Identifiable {
+    case settings, metadata
+    
+    var id: Int {
+        hashValue
     }
 }
