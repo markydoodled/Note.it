@@ -31,6 +31,7 @@ struct ContentView: View {
     }()
     @State var fileURL: URL
     @State var showNoURLWarning = false
+    @AppStorage("selectedAppearance") var selectedAppearance = 3
     var body: some View {
         NavigationView {
             List {
@@ -162,42 +163,65 @@ struct ContentView: View {
                 ToolbarItem(placement: .navigation) {
                     Button(action: {toggleSidebar()}) {
                         Image(systemName: "sidebar.left")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("Toggle Sidebar"))
+                }
+                ToolbarItem(placement: .navigation) {
+                    Menu {
+                        Button(action: {self.selectedAppearance = 1}) {
+                            Text("􀆮 ") + Text("Light")
+                        }
+                        Button(action: {self.selectedAppearance = 2}) {
+                            Text("􀆺 ") + Text("Dark")
+                        }
+                        Button(action: {self.selectedAppearance = 3}) {
+                            Text("􀟛 ") + Text("System")
+                        }
+                    } label: {
+                        Label("Appearance", systemImage: "cloud.sun").foregroundColor(.secondary)
+                    }
+                    .help(Text("Change Appearance"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSDocumentController().newDocument(Any?.self)}) {
                         Image(systemName: "plus")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("New"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSDocumentController().openDocument(Any?.self)}) {
                         Image(systemName: "doc")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("Open"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSApp.sendAction(#selector(NSDocument.save(_:)), to: nil, from: self)}) {
                         Image(systemName: "square.and.arrow.down")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("Save"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {copyToClipBoard(textToCopy: document.text)}) {
                         Image(systemName: "doc.on.doc")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("Copy"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
                         Image(systemName: "folder")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("Move To…"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
                         Image(systemName: "doc.badge.plus")
+                            .foregroundColor(.secondary)
                     }
                     .help(Text("Duplicate"))
                 }
@@ -220,6 +244,24 @@ struct ContentView: View {
                 }
                 } */
             }
+        .onAppear {
+            if selectedAppearance == 1 {
+                NSApp.appearance = NSAppearance(named: .aqua)
+            } else if selectedAppearance == 2 {
+                NSApp.appearance = NSAppearance(named: .darkAqua)
+            } else {
+                NSApp.appearance = nil
+            }
+        }
+        .onChange(of: selectedAppearance) { app in
+            if selectedAppearance == 1 {
+                NSApp.appearance = NSAppearance(named: .aqua)
+            } else if selectedAppearance == 2 {
+                NSApp.appearance = NSAppearance(named: .darkAqua)
+            } else {
+                NSApp.appearance = nil
+            }
+        }
     }
     func getAttributes() {
         let creationDate = fileURL.creationDate

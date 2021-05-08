@@ -80,19 +80,19 @@ struct ContentView: View {
                         }
                         .sheet(isPresented: $showingSettings) {
                             NavigationView {
-                                Text("Text")
+                                EditorSettings()
                                 .navigationTitle("Settings")
-                                .toolbar {
-                                    ToolbarItem(placement: .navigationBarTrailing) {
-                                        Button(action: {self.showingSettings = false
-                                            if showingSettings == false {
-                                                print("false")
+                                    .toolbar {
+                                        ToolbarItem(placement: .navigationBarTrailing) {
+                                            Button(action: {self.showingSettings = false
+                                                if showingSettings == false {
+                                                    print("false")
+                                                }
+                                            }) {
+                                                Text("Done")
                                             }
-                                        }) {
-                                            Text("Done")
                                         }
                                     }
-                                }
                             }
                         }
                 }

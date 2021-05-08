@@ -12,57 +12,57 @@ struct EditorSettings: View {
     @AppStorage("lineWrapping") var lineWrapping = true
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
-    @AppStorage("appTheme") var appTheme: String = "system"
+    //@AppStorage("appTheme") var appTheme: String = "system"
     var body: some View {
         Form {
-            VStack {
+            List {
                 HStack {
-                    Spacer()
                     Stepper("Font Size: \(fontSize)", value: $fontSize, in: 1...120)
-                    Spacer()
                 }
-                HStack {
+                .padding(.horizontal)
+               /* HStack {
                     Text("Appearance: ")
-                    Button(action: {//NSApp.appearance = NSAppearance(named: .aqua)
-                        appTheme = "light"
-                        UIApplication.shared.windows.forEach { window in
-                            window.overrideUserInterfaceStyle = .light
+                    Spacer()
+                    Menu {
+                        Button(action: {//NSApp.appearance = NSAppearance(named: .aqua)
+                            appTheme = "light"
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .light}}) {
+                            Text("Light")
                         }
-                    }) {
-                    Text("Light")
+                            Button(action: {//NSApp.appearance = NSAppearance(named: .darkAqua)
+                                appTheme = "dark"
+                                UIApplication.shared.windows.forEach { window in
+                                    window.overrideUserInterfaceStyle = .dark}}) {
+                                Text("Dark")
+                            }
+                                Button(action: {//NSApp.appearance = nil
+                                    appTheme = "system"
+                                    UIApplication.shared.windows.forEach { window in
+                                        window.overrideUserInterfaceStyle = .unspecified}}) {
+                                    Text("System")
+                                }
+                    } label: {
+                        Text("Choose")
                     }
-                    .padding(.horizontal)
-                    Button(action: {//NSApp.appearance = NSAppearance(named: .darkAqua)
-                        appTheme = "dark"
-                        UIApplication.shared.windows.forEach { window in
-                            window.overrideUserInterfaceStyle = .dark
-                        }
-                    }) {
-                    Text("Dark")
+                }
+                .padding(.horizontal) */
+                HStack {
+                    Toggle(isOn: $lineWrapping) {
+                        Text("Line Wrapping")
                     }
-                    .padding(.trailing)
-                    Button(action: {//NSApp.appearance = nil
-                        appTheme = "system"
-                        UIApplication.shared.windows.forEach { window in
-                            window.overrideUserInterfaceStyle = .unspecified
-                        }
-                    }) {
-                    Text("System")
+                    .toggleStyle(SwitchToggleStyle())
+                }
+                .padding(.horizontal)
+                HStack {
+                    Toggle(isOn: $showInvisibleCharacters) {
+                        Text("Show Invisible Characters")
                     }
-                    .padding(.trailing)
+                    .toggleStyle(SwitchToggleStyle())
                 }
-                Toggle(isOn: $lineWrapping) {
-                    Text("Line Wrapping")
-                }
-                .toggleStyle(SwitchToggleStyle())
-                Toggle(isOn: $showInvisibleCharacters) {
-                    Text("Show Invisible Characters")
-                }
-                .toggleStyle(SwitchToggleStyle())
+                .padding(.horizontal)
             }
         }
-        .padding(20)
-        .frame(width: 400, height: 150)
     }
 }
 
@@ -1289,8 +1289,6 @@ struct ThemesSettings: View {
                 }
             })
         }
-        .padding(20)
-        .frame(width: 350, height: 150)
     }
 }
 
