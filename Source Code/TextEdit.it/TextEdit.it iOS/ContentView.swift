@@ -13,24 +13,25 @@ struct ContentView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State var editor = EditorSettings()
     @State var themes = ThemesSettings()
-    @State var showNoURLWarning = false
     @State var fileURL: URL
     @AppStorage("selectedAppearance") var selectedAppearance = 3
     @State var activeSheet: ActiveSheet?
+    @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
     @State var fileTitleAtribute: String
     @State var fileCreatedAttribute: Date
     @State var fileModifiedAttribute: Date
     @State var fileExtensionAttribute: String
     @State var fileOwnerAttribute: String
+    @State var fileNameAttribute: String
     @State var filePathAttribute: String
-    @State var fileCommentsAttribute: String
     private let fileByteCountFormatter: ByteCountFormatter = {
         let bcf = ByteCountFormatter()
         bcf.allowedUnits = [.useAll]
         bcf.countStyle = .file
         return bcf
     }()
+    @Environment(\.undoManager) var undoManager
     var body: some View {
         if horizontalSizeClass == .regular {
             GeometryReader { reader in
@@ -44,13 +45,6 @@ struct ContentView: View {
                   .onLoadSuccess {
                     print("Loaded")
                   }
-                    .onContentChange { newCodeBlock in
-                        if fileURL == URL(string: "/") {
-                            self.showNoURLWarning = true
-                        } else {
-                            self.showNoURLWarning = false
-                        }
-                    }
                   .onLoadFail { error in
                     print("Load failed : \(error.localizedDescription)")
                   }
@@ -62,15 +56,9 @@ struct ContentView: View {
                         case .settings:
                             NavigationView {
                                 Form {
-                                    Section(header: Label("Editor", systemImage: "note.text")) {
                                 EditorSettings()
-                                }
-                                    Section(header: Label("Themes", systemImage: "paintbrush")) {
-                                        ThemesSettings()
-                                    }
-                                    Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
-                                        MiscSettings()
-                                    }
+                                ThemesSettings()
+                                MiscSettings()
                                 }
                                 .navigationTitle("Settings")
                                     .toolbar {
@@ -84,7 +72,14 @@ struct ContentView: View {
                         case .metadata:
                             NavigationView {
                                 Form {
-                                   MetadataView()
+                                    Label("Title: \(fileNameAttribute)", systemImage: "textformat.alt")
+                                        Label("File Extension: \(fileExtensionAttribute)", systemImage: "square.grid.3x1.folder.badge.plus")
+                                        Label("Size: \(fileSizeAttribute)", systemImage: "externaldrive")
+                                        Label("File Path: \(filePathAttribute)", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
+                                        Label("Owner: \(fileOwnerAttribute)", systemImage: "person")
+                                        Label("Created: \(fileCreatedAttribute)", systemImage: "calendar.badge.plus")
+                                        Label("Modified: \(fileModifiedAttribute)", systemImage: "calendar.badge.clock")
+                                        Label("File Type: \(fileTypeAttribute)", systemImage: "doc")
                                 }
                                     .navigationTitle("Metadata")
                                     .toolbar {
@@ -94,7 +89,8 @@ struct ContentView: View {
                                             }
                                         }
                                         ToolbarItem(placement: .navigationBarLeading) {
-                                            Button(action: {}) {
+                                            Button(action: {fileURL = URL(string: "/")!
+                                                    getAttributes()}) {
                                                 Text("Update")
                                             }
                                         }
@@ -130,6 +126,11 @@ struct ContentView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {}) {
                         Image(systemName: "arrow.uturn.backward")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {}) {
+                        Image(systemName: "arrow.uturn.forward")
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -180,13 +181,6 @@ struct ContentView: View {
                   .onLoadSuccess {
                     print("Loaded")
                   }
-                    .onContentChange { newCodeBlock in
-                        if fileURL == URL(string: "/") {
-                            self.showNoURLWarning = true
-                        } else {
-                            self.showNoURLWarning = false
-                        }
-                    }
                   .onLoadFail { error in
                     print("Load failed : \(error.localizedDescription)")
                   }
@@ -219,6 +213,16 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {}) {
+                        Image(systemName: "arrow.uturn.backward")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {}) {
+                        Image(systemName: "arrow.uturn.forward")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button(action: {self.selectedAppearance = 1}) {
                             Label("Light", systemImage: "sun.max.fill")
@@ -248,21 +252,20 @@ struct ContentView: View {
                         Image(systemName: "info.circle")
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {}) {
+                        Image(systemName: "square.and.arrow.down")
+                    }
+                }
             }
             .sheet(item: $activeSheet) { item in
                         switch item {
                         case .settings:
                             NavigationView {
                                 Form {
-                                    Section(header: Label("Editor", systemImage: "note.text")) {
                                 EditorSettings()
-                                }
-                                    Section(header: Label("Themes", systemImage: "paintbrush")) {
-                                        ThemesSettings()
-                                    }
-                                    Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
-                                        MiscSettings()
-                                    }
+                                ThemesSettings()
+                                MiscSettings()
                                 }
                                 .navigationTitle("Settings")
                                     .toolbar {
@@ -275,9 +278,16 @@ struct ContentView: View {
                             }
                         case .metadata:
                             NavigationView {
-                                Form {
-                                   MetadataView()
-                                }
+                                    Form {
+                                        Label("Title: \(fileNameAttribute)", systemImage: "textformat.alt")
+                                            Label("File Extension: \(fileExtensionAttribute)", systemImage: "square.grid.3x1.folder.badge.plus")
+                                            Label("Size: \(fileSizeAttribute)", systemImage: "externaldrive")
+                                            Label("File Path: \(filePathAttribute)", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
+                                            Label("Owner: \(fileOwnerAttribute)", systemImage: "person")
+                                            Label("Created: \(fileCreatedAttribute)", systemImage: "calendar.badge.plus")
+                                            Label("Modified: \(fileModifiedAttribute)", systemImage: "calendar.badge.clock")
+                                            Label("File Type: \(fileTypeAttribute)", systemImage: "doc")
+                                    }
                                     .navigationTitle("Metadata")
                                     .toolbar {
                                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -286,7 +296,8 @@ struct ContentView: View {
                                             }
                                         }
                                         ToolbarItem(placement: .navigationBarLeading) {
-                                            Button(action: {}) {
+                                            Button(action: {fileURL = URL(string: "/")!
+                                                getAttributes()}) {
                                                 Text("Update")
                                             }
                                         }
@@ -295,6 +306,24 @@ struct ContentView: View {
                         }
                     }
         }
+    }
+    func getAttributes() {
+        let creationDate = fileURL.creationDate
+        let modificationDate = fileURL.modificationDate
+        let type = fileURL.fileType
+        let owner = fileURL.fileOwner
+        let size = fileURL.fileSize
+        let fileextension = fileURL.pathExtension
+        let filePath = fileURL.path
+        let fileName = fileURL.lastPathComponent
+        fileNameAttribute = fileName
+        filePathAttribute = filePath
+        fileExtensionAttribute = fileextension
+        fileSizeAttribute = Int64(size)
+        fileOwnerAttribute = owner
+        fileTypeAttribute = type
+        fileModifiedAttribute = modificationDate!
+        fileCreatedAttribute = creationDate!
     }
 }
 
@@ -333,74 +362,15 @@ extension URL {
         return attributes?[.creationDate] as? Date
     }
     
+    var fileType: String {
+        return attributes?[.type] as? String ?? ""
+    }
+    
     var modificationDate: Date? {
         return attributes?[.modificationDate] as? Date
     }
     
     var fileOwner: String {
         return attributes?[.ownerAccountName] as? String ?? ""
-    }
-}
-
-struct MetadataView: View {
-    var body: some View {
-        List {
-            HStack {
-                Image(systemName: "textformat.alt")
-                    .foregroundColor(.accentColor)
-                Text(" Title")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-            HStack {
-                Image(systemName: "square.grid.3x1.folder.badge.plus")
-                    .foregroundColor(.accentColor)
-                Text(" File Extension")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-            HStack {
-                Image(systemName: "externaldrive")
-                    .foregroundColor(.accentColor)
-                Text(" Size")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-            HStack {
-               Image(systemName: "point.topleft.down.curvedto.point.bottomright.up")
-                .foregroundColor(.accentColor)
-                Text(" File Path")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-            HStack {
-                Image(systemName: "person")
-                    .foregroundColor(.accentColor)
-                Text(" Owner")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-            HStack {
-               Image(systemName: "calendar.badge.plus")
-                .foregroundColor(.accentColor)
-                Text(" Created")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-            HStack {
-                Image(systemName: "calendar.badge.clock")
-                    .foregroundColor(.accentColor)
-                Text(" Modified")
-                Spacer()
-                Text("Text")
-            }
-            .padding(.horizontal)
-        }
     }
 }

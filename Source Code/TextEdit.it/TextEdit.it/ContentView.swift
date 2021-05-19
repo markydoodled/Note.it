@@ -22,7 +22,6 @@ struct ContentView: View {
     @State var fileExtensionAttribute: String
     @State var fileOwnerAttribute: String
     @State var filePathAttribute: String
-    @State var fileCommentsAttribute: String
     private let fileByteCountFormatter: ByteCountFormatter = {
         let bcf = ByteCountFormatter()
         bcf.allowedUnits = [.useAll]

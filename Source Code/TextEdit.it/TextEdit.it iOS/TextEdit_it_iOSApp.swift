@@ -11,7 +11,7 @@ import SwiftUI
 struct TextEdit_it_iOSApp: App {
     var body: some Scene {
         DocumentGroup(newDocument: TextEdit_it_iOSDocument()) { file in
-            ContentView(document: file.$document, fileURL: URL(string: "/")!, fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", filePathAttribute: "", fileCommentsAttribute: "")
+            ContentView(document: file.$document, fileURL: URL(string: "/")!, fileTypeAttribute: "", fileSizeAttribute: 0, fileTitleAtribute: "", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "", fileOwnerAttribute: "", fileNameAttribute: "", filePathAttribute: "")
         }
     }
 }

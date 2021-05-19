@@ -13,19 +13,17 @@ struct MiscSettings: View {
     @State var result: Result<MFMailComposeResult, Error>? = nil
     @State var isShowingMailView = false
     var body: some View {
-         List {
+        Section(header: Label("Misc.", systemImage: "ellipsis.circle")) {
             HStack {
                 Text("Version: ")
                 Spacer()
                 Text("1.2")
             }
-            .padding(.horizontal)
             HStack {
                 Text("Build: ")
                 Spacer()
                 Text("2")
             }
-            .padding(.horizontal)
             HStack {
                 Text("Feedback: ")
                 Spacer()
@@ -36,7 +34,6 @@ struct MiscSettings: View {
                     MailView(isShowing: self.$isShowingMailView, result: self.$result)
                 }
             }
-            .padding(.horizontal)
         }
     }
 }
@@ -95,26 +92,23 @@ struct EditorSettings: View {
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
     var body: some View {
-            List {
+        Section(header: Label("Editor", systemImage: "note.text")) {
                 HStack {
                     Stepper("Font Size: \(fontSize)", value: $fontSize, in: 1...120)
                 }
-                .padding(.horizontal)
                 HStack {
                     Toggle(isOn: $lineWrapping) {
                         Text("Line Wrapping")
                     }
                     .toggleStyle(SwitchToggleStyle())
                 }
-                .padding(.horizontal)
                 HStack {
                     Toggle(isOn: $showInvisibleCharacters) {
                         Text("Show Invisible Characters")
                     }
                     .toggleStyle(SwitchToggleStyle())
                 }
-                .padding(.horizontal)
-            }
+        }
     }
 }
 
@@ -124,7 +118,7 @@ struct ThemesSettings: View {
     @AppStorage("syntax") var syntax: CodeMode = CodeMode.text
     @AppStorage("theme") var theme: CodeViewTheme = CodeViewTheme.zenburnesque
     var body: some View {
-        List {
+        Section(header: Label("Themes", systemImage: "paintbrush")) {
             HStack {
                 Text("Theme: ")
                 Spacer()
@@ -910,7 +904,6 @@ struct ThemesSettings: View {
                 }
             }
         }
-            .padding(.horizontal)
             HStack {
                 Text("Syntax Highlighting: ")
                 Spacer()
@@ -1355,8 +1348,7 @@ struct ThemesSettings: View {
                 }
             })
         }
-            .padding(.horizontal)
-        }
+    }
     }
 }
 

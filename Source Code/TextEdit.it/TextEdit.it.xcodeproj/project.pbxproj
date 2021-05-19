@@ -13,10 +13,10 @@
 		D5130CE725CEDE42001256A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5130CE625CEDE42001256A2 /* ContentView.swift */; };
 		D5130CE925CEDE44001256A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5130CE825CEDE44001256A2 /* Assets.xcassets */; };
 		D5130CEC25CEDE44001256A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5130CEB25CEDE44001256A2 /* Preview Assets.xcassets */; };
+		D5238831264FFD8B003391F8 /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D5238830264FFD8B003391F8 /* CodeMirror-SwiftUI */; };
+		D5238832264FFD8B003391F8 /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D5238830264FFD8B003391F8 /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D550CE2B25E2AF52005FA8BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D550CE2A25E2AF52005FA8BB /* SettingsView.swift */; };
 		D559AB75261CBFED00C6E8FC /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */; };
-		D559AB78261CC34400C6E8FC /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */; };
-		D559AB79261CC34400C6E8FC /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D5762E05264042110069A17F /* TextEdit_it_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E04264042110069A17F /* TextEdit_it_iOSApp.swift */; };
 		D5762E07264042110069A17F /* TextEdit_it_iOSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E06264042110069A17F /* TextEdit_it_iOSDocument.swift */; };
 		D5762E09264042110069A17F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E08264042110069A17F /* ContentView.swift */; };
@@ -35,7 +35,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D559AB79261CC34400C6E8FC /* CodeMirror-SwiftUI in Embed Frameworks */,
+				D5238832264FFD8B003391F8 /* CodeMirror-SwiftUI in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,8 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D559AB78261CC34400C6E8FC /* CodeMirror-SwiftUI in Frameworks */,
 				D50C75FD262DE1E400561E7A /* Preferences in Frameworks */,
+				D5238831264FFD8B003391F8 /* CodeMirror-SwiftUI in Frameworks */,
 				D559AB75261CBFED00C6E8FC /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,8 +187,8 @@
 			name = Note.it;
 			packageProductDependencies = (
 				D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */,
-				D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */,
 				D50C75FC262DE1E400561E7A /* Preferences */,
+				D5238830264FFD8B003391F8 /* CodeMirror-SwiftUI */,
 			);
 			productName = TextEdit.it;
 			productReference = D5130CDF25CEDE42001256A2 /* Note.it.app */;
@@ -222,7 +222,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					D5130CDE25CEDE42001256A2 = {
 						CreatedOnToolsVersion = 12.4;
@@ -425,6 +425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TextEdit.it/TextEdit_it.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2;
@@ -451,6 +452,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TextEdit.it/TextEdit_it.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2;
@@ -587,15 +589,15 @@
 			package = D50C75FB262DE1E400561E7A /* XCRemoteSwiftPackageReference "Preferences" */;
 			productName = Preferences;
 		};
+		D5238830264FFD8B003391F8 /* CodeMirror-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
+			productName = "CodeMirror-SwiftUI";
+		};
 		D559AB74261CBFED00C6E8FC /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D559AB73261CBFED00C6E8FC /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
-		};
-		D559AB77261CC34400C6E8FC /* CodeMirror-SwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
-			productName = "CodeMirror-SwiftUI";
 		};
 		D5762E16264042420069A17F /* CodeMirror-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
