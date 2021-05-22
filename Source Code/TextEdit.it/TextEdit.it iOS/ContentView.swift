@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CodeMirror_SwiftUI
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Binding var document: TextEdit_it_iOSDocument
@@ -32,6 +33,9 @@ struct ContentView: View {
         return bcf
     }()
     @Environment(\.undoManager) var undoManager
+    @State var showingExport = false
+    @State var contentTypeSelection = UTType.plainText
+    @State var pickerExportSelection = 1
     var body: some View {
         if horizontalSizeClass == .regular {
             GeometryReader { reader in
@@ -95,6 +99,95 @@ struct ContentView: View {
                                             }
                                         }
                                     }
+                            }
+                        case .export:
+                            NavigationView {
+                                VStack {
+                                Text("Please Select A File Type To Export To: ")
+                                    .bold()
+                                    .padding()
+                                Picker(selection: $pickerExportSelection, label: Text("Export Type")) {
+                                    PickerList1()
+                                    PickerList2()
+                                    PickerList3()
+                                }
+                                .pickerStyle(InlinePickerStyle())
+                                .padding()
+                            }
+                                .fileExporter(isPresented: $showingExport, document: document, contentType: contentTypeSelection) { result in
+                                    switch result {
+                                    case .success(let url):
+                                        print("Saved to \(url)")
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                            }
+                                .navigationTitle("Export")
+                                .toolbar {
+                                    //ToolbarItem(placement: .navigationBarTrailing) {
+                                        //Button(action: {activeSheet = nil}) {
+                                            //Text("Done")
+                                        //}
+                                    //}
+                                    /*ToolbarItem(placement: .navigationBarLeading) {
+                                        Button(action: {
+                                            if pickerExportSelection == 1 {
+                                                contentTypeSelection = .swiftSource
+                                            } else if pickerExportSelection == 2 {
+                                                contentTypeSelection = .plainText
+                                            } else if pickerExportSelection == 3 {
+                                                contentTypeSelection = .utf8PlainText
+                                            } else if pickerExportSelection == 4 {
+                                                contentTypeSelection = .utf16PlainText
+                                            } else if pickerExportSelection == 5 {
+                                                contentTypeSelection = .utf16ExternalPlainText
+                                            } else if pickerExportSelection == 6 {
+                                                contentTypeSelection = .utf8TabSeparatedText
+                                            } else if pickerExportSelection == 7 {
+                                                contentTypeSelection = .xml
+                                            } else if pickerExportSelection == 8 {
+                                                contentTypeSelection = .yaml
+                                            } else if pickerExportSelection == 9 {
+                                                contentTypeSelection = .json
+                                            } else if pickerExportSelection == 10 {
+                                                contentTypeSelection = .html
+                                            } else if pickerExportSelection == 11 {
+                                                contentTypeSelection = .assemblyLanguageSource
+                                            } else if pickerExportSelection == 12 {
+                                                contentTypeSelection = .cHeader
+                                            } else if pickerExportSelection == 13 {
+                                                contentTypeSelection = .cSource
+                                            } else if pickerExportSelection == 14 {
+                                                contentTypeSelection = .cPlusPlusHeader
+                                            } else if pickerExportSelection == 15 {
+                                                contentTypeSelection = .cPlusPlusSource
+                                            } else if pickerExportSelection == 16 {
+                                                contentTypeSelection = .objectiveCPlusPlusSource
+                                            } else if pickerExportSelection == 17 {
+                                                contentTypeSelection = .objectiveCSource
+                                            } else if pickerExportSelection == 18 {
+                                                contentTypeSelection = .appleScript
+                                            } else if pickerExportSelection == 19 {
+                                                contentTypeSelection = .javaScript
+                                            } else if pickerExportSelection == 20 {
+                                                contentTypeSelection = .shellScript
+                                            } else if pickerExportSelection == 21 {
+                                                contentTypeSelection = .pythonScript
+                                            } else if pickerExportSelection == 22 {
+                                                contentTypeSelection = .rubyScript
+                                            } else if pickerExportSelection == 23 {
+                                                contentTypeSelection = .perlScript
+                                            } else if pickerExportSelection == 24 {
+                                                contentTypeSelection = .phpScript
+                                            } else {
+                                                print("Unreconised Export")
+                                            }
+                                                self.showingExport = true
+                                        }) {
+                                            Text("Export")
+                                        }
+                                    }*/
+                                }
                             }
                         }
                     }
@@ -164,8 +257,8 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
-                        Image(systemName: "square.and.arrow.down")
+                    Button(action: {activeSheet = .export}) {
+                        Image(systemName: "square.and.arrow.up")
                     }
                 }
             }
@@ -253,8 +346,8 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
-                        Image(systemName: "square.and.arrow.down")
+                    Button(action: {activeSheet = .export}) {
+                        Image(systemName: "square.and.arrow.up")
                     }
                 }
             }
@@ -303,6 +396,95 @@ struct ContentView: View {
                                         }
                                     }
                             }
+                        case .export:
+                            NavigationView {
+                                VStack {
+                                Text("Please Select A File Type To Export To: ")
+                                    .bold()
+                                    .padding()
+                                Picker(selection: $pickerExportSelection, label: Text("Export Type")) {
+                                    PickerList1()
+                                    PickerList2()
+                                    PickerList3()
+                                }
+                                .pickerStyle(InlinePickerStyle())
+                                .padding()
+                            }
+                                .fileExporter(isPresented: $showingExport, document: document, contentType: contentTypeSelection) { result in
+                                    switch result {
+                                    case .success(let url):
+                                        print("Saved to \(url)")
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                            }
+                                .navigationTitle("Export")
+                                .toolbar {
+                                    ToolbarItem(placement: .navigationBarTrailing) {
+                                        Button(action: {activeSheet = nil}) {
+                                            Text("Done")
+                                        }
+                                    }
+                                    ToolbarItem(placement: .navigationBarLeading) {
+                                        Button(action: {
+                                            if pickerExportSelection == 1 {
+                                                contentTypeSelection = .swiftSource
+                                            } else if pickerExportSelection == 2 {
+                                                contentTypeSelection = .plainText
+                                            } else if pickerExportSelection == 3 {
+                                                contentTypeSelection = .utf8PlainText
+                                            } else if pickerExportSelection == 4 {
+                                                contentTypeSelection = .utf16PlainText
+                                            } else if pickerExportSelection == 5 {
+                                                contentTypeSelection = .utf16ExternalPlainText
+                                            } else if pickerExportSelection == 6 {
+                                                contentTypeSelection = .utf8TabSeparatedText
+                                            } else if pickerExportSelection == 7 {
+                                                contentTypeSelection = .xml
+                                            } else if pickerExportSelection == 8 {
+                                                contentTypeSelection = .yaml
+                                            } else if pickerExportSelection == 9 {
+                                                contentTypeSelection = .json
+                                            } else if pickerExportSelection == 10 {
+                                                contentTypeSelection = .html
+                                            } else if pickerExportSelection == 11 {
+                                                contentTypeSelection = .assemblyLanguageSource
+                                            } else if pickerExportSelection == 12 {
+                                                contentTypeSelection = .cHeader
+                                            } else if pickerExportSelection == 13 {
+                                                contentTypeSelection = .cSource
+                                            } else if pickerExportSelection == 14 {
+                                                contentTypeSelection = .cPlusPlusHeader
+                                            } else if pickerExportSelection == 15 {
+                                                contentTypeSelection = .cPlusPlusSource
+                                            } else if pickerExportSelection == 16 {
+                                                contentTypeSelection = .objectiveCPlusPlusSource
+                                            } else if pickerExportSelection == 17 {
+                                                contentTypeSelection = .objectiveCSource
+                                            } else if pickerExportSelection == 18 {
+                                                contentTypeSelection = .appleScript
+                                            } else if pickerExportSelection == 19 {
+                                                contentTypeSelection = .javaScript
+                                            } else if pickerExportSelection == 20 {
+                                                contentTypeSelection = .shellScript
+                                            } else if pickerExportSelection == 21 {
+                                                contentTypeSelection = .pythonScript
+                                            } else if pickerExportSelection == 22 {
+                                                contentTypeSelection = .rubyScript
+                                            } else if pickerExportSelection == 23 {
+                                                contentTypeSelection = .perlScript
+                                            } else if pickerExportSelection == 24 {
+                                                contentTypeSelection = .phpScript
+                                            } else {
+                                                print("Unreconised Export")
+                                            }
+                                                self.showingExport = true
+                                        }) {
+                                            Text("Export")
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
         }
@@ -333,7 +515,7 @@ private func copyToClipBoard(textToCopy: String) {
 }
 
 enum ActiveSheet: Identifiable {
-    case settings, metadata
+    case settings, metadata, export
     
     var id: Int {
         hashValue
@@ -372,5 +554,44 @@ extension URL {
     
     var fileOwner: String {
         return attributes?[.ownerAccountName] as? String ?? ""
+    }
+}
+
+struct PickerList1: View {
+    var body: some View {
+        Text("Swift").tag(1)
+        Text("Plain Text").tag(2)
+        Text("UTF8 Plain Text").tag(3)
+        Text("UTF16 Plain Text").tag(4)
+        Text("UTF16 External Plain Text").tag(5)
+        Text("UTF8 Tab Separated Text").tag(6)
+        Text("XML").tag(7)
+        Text("YAML").tag(8)
+        Text("JSON").tag(9)
+        Text("HTML").tag(10)
+    }
+}
+
+struct PickerList2: View {
+    var body: some View {
+        Text("Assembly Language").tag(11)
+        Text("C Header").tag(12)
+        Text("C Source").tag(13)
+        Text("C++ Header").tag(14)
+        Text("C++ Source").tag(15)
+        Text("Objective C++ Source").tag(16)
+        Text("Objective C Source").tag(17)
+        Text("Apple Script").tag(18)
+        Text("JavaScript").tag(19)
+        Text("Shell Script").tag(20)
+    }
+}
+
+struct PickerList3: View {
+    var body: some View {
+        Text("Python Script").tag(21)
+        Text("Ruby Script").tag(22)
+        Text("Perl Script").tag(23)
+        Text("PHP Script").tag(24)
     }
 }
