@@ -212,12 +212,12 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {}) {
+                    Button(action: {undoManager?.undo()}) {
                         Image(systemName: "arrow.uturn.backward")
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {}) {
+                    Button(action: {undoManager?.redo()}) {
                         Image(systemName: "arrow.uturn.forward")
                     }
                 }
@@ -296,12 +296,12 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {}) {
+                    Button(action: {undoManager?.undo()}) {
                         Image(systemName: "arrow.uturn.backward")
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {}) {
+                    Button(action: {undoManager?.redo()}) {
                         Image(systemName: "arrow.uturn.forward")
                     }
                 }
