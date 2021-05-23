@@ -93,7 +93,7 @@ struct ContentView: View {
                                             }
                                         }
                                         ToolbarItem(placement: .navigationBarLeading) {
-                                            Button(action: {fileURL = URL(string: "/")!
+                                            Button(action: {getDirList()
                                                     getAttributes()}) {
                                                 Text("Update")
                                             }
@@ -389,7 +389,7 @@ struct ContentView: View {
                                             }
                                         }
                                         ToolbarItem(placement: .navigationBarLeading) {
-                                            Button(action: {fileURL = URL(string: "/")!
+                                            Button(action: {getDirList()
                                                 getAttributes()}) {
                                                 Text("Update")
                                             }
@@ -507,6 +507,30 @@ struct ContentView: View {
         fileModifiedAttribute = modificationDate!
         fileCreatedAttribute = creationDate!
     }
+    func getDirList() {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        guard let directoryURL = URL(string: paths.path) else {return}
+        do {
+           let contents = try
+           FileManager.default.contentsOfDirectory(at: directoryURL,
+                  includingPropertiesForKeys:[.contentAccessDateKey],
+                  options: [.skipsHiddenFiles])
+               .sorted(by: {
+                let date0 = try $0.promisedItemResourceValues(forKeys:[.contentAccessDateKey]).contentAccessDate!
+                let date1 = try $1.promisedItemResourceValues(forKeys:[.contentAccessDateKey]).contentAccessDate!
+                   return date0.compare(date1) == .orderedAscending
+                })
+          
+            for item in contents {
+                guard let t = try? item.promisedItemResourceValues(forKeys:[.contentAccessDateKey]).contentAccessDate
+                    else {return}
+                print ("\(t)   \(item.lastPathComponent)")
+                fileURL = item
+            }
+        } catch {
+            print (error)
+        }
+}
 }
 
 private func copyToClipBoard(textToCopy: String) {
