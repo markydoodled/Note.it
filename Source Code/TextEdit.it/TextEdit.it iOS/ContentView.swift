@@ -38,8 +38,6 @@ struct ContentView: View {
     @State var pickerExportSelection = 1
     var body: some View {
         if horizontalSizeClass == .regular {
-            GeometryReader { reader in
-              ScrollView {
                 CodeView(theme: themes.theme,
                         code: $document.text,
                         mode: themes.syntax.mode(),
@@ -52,9 +50,6 @@ struct ContentView: View {
                   .onLoadFail { error in
                     print("Load failed : \(error.localizedDescription)")
                   }
-                  .frame(height: reader.size.height)
-              }.frame(height: reader.size.height)
-            }
             .sheet(item: $activeSheet) { item in
                         switch item {
                         case .settings:
@@ -124,12 +119,12 @@ struct ContentView: View {
                             }
                                 .navigationTitle("Export")
                                 .toolbar {
-                                    //ToolbarItem(placement: .navigationBarTrailing) {
-                                        //Button(action: {activeSheet = nil}) {
-                                            //Text("Done")
-                                        //}
-                                    //}
-                                    /*ToolbarItem(placement: .navigationBarLeading) {
+                                    ToolbarItem(placement: .navigationBarTrailing) {
+                                        Button(action: {activeSheet = nil}) {
+                                            Text("Done")
+                                        }
+                                    }
+                                    ToolbarItem(placement: .navigationBarLeading) {
                                         Button(action: {
                                             if pickerExportSelection == 1 {
                                                 contentTypeSelection = .swiftSource
@@ -186,7 +181,7 @@ struct ContentView: View {
                                         }) {
                                             Text("Export")
                                         }
-                                    }*/
+                                    }
                                 }
                             }
                         }
@@ -263,8 +258,6 @@ struct ContentView: View {
                 }
             }
         } else {
-            GeometryReader { reader in
-              ScrollView {
                 CodeView(theme: themes.theme,
                         code: $document.text,
                         mode: themes.syntax.mode(),
@@ -277,9 +270,6 @@ struct ContentView: View {
                   .onLoadFail { error in
                     print("Load failed : \(error.localizedDescription)")
                   }
-                  .frame(height: reader.size.height)
-              }.frame(height: reader.size.height)
-            }
             .onAppear {
                 if selectedAppearance == 1 {
                     UIApplication.shared.windows.forEach { window in
