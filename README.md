@@ -20,14 +20,19 @@ To download the latest stable version of the app, click the link:
  - More file formats
  - Export to other file formats
  - In-app Finder metadata integration for the document
+ - An iOS/iPadOS version (possibly)
 
 ## **Features To Be Implemented**
 
- - An iOS/iPadOS version (possibly)
+ - Any Suggestions?
+
+## Images
+
+To view some screenshots, click here:
+[Images](https://github.com/markydoodled/Note.it/tree/main/Images)
 
 ## **Things To Note**
 
  1. This project is free to be added to by the community, if you wish to help, file a issue with the enhancement tag
  2. Any and all feedback will be helpful for future development
  3. If you wish to report a bug, please use either the feedback button in the app or use GitHub issues.
- 4. Please don't expect it to be great on the first few versions, I am still learning to code and still trying to understand how macOS works
