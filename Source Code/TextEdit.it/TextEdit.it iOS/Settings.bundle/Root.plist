@@ -18,7 +18,7 @@
 			<key>Title</key>
 			<string>Version</string>
 			<key>Key</key>
-			<string>keyVersion</string>
+			<string>kVersion</string>
 			<key>DefaultValue</key>
 			<string>1.2</string>
 		</dict>
@@ -28,7 +28,7 @@
 			<key>Title</key>
 			<string>Build</string>
 			<key>Key</key>
-			<string>keyBuild</string>
+			<string>kBuild</string>
 			<key>DefaultValue</key>
 			<string>2</string>
 		</dict>
