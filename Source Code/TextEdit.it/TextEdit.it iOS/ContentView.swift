@@ -215,11 +215,13 @@ struct ContentView: View {
                     Button(action: {undoManager?.undo()}) {
                         Image(systemName: "arrow.uturn.backward")
                     }
+                    .help(Text("Undo"))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {undoManager?.redo()}) {
                         Image(systemName: "arrow.uturn.forward")
                     }
+                    .help(Text("Redo"))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
@@ -235,26 +237,31 @@ struct ContentView: View {
                     } label: {
                         Label("Appearance", systemImage: "cloud.sun").font(.title3)
                     }
+                    .help(Text("Change Appearance"))
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {activeSheet = .settings}) {
                             Label("Settings", systemImage: "gearshape")
                         }
+                    .help(Text("Settings"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {copyToClipBoard(textToCopy: document.text)}) {
                         Image(systemName: "doc.on.doc")
                     }
+                    .help(Text("Copy"))
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {activeSheet = .metadata}) {
                         Image(systemName: "info.circle")
                     }
+                    .help(Text("Metadata"))
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {activeSheet = .export}) {
                         Image(systemName: "square.and.arrow.up")
                     }
+                    .help(Text("Export"))
                 }
             }
         } else {
@@ -299,11 +306,13 @@ struct ContentView: View {
                     Button(action: {undoManager?.undo()}) {
                         Image(systemName: "arrow.uturn.backward")
                     }
+                    .help(Text("Undo"))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {undoManager?.redo()}) {
                         Image(systemName: "arrow.uturn.forward")
                     }
+                    .help(Text("Redo"))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
@@ -319,26 +328,31 @@ struct ContentView: View {
                     } label: {
                         Label("Appearance", systemImage: "cloud.sun").font(.title3)
                     }
+                    .help(Text("Change Appearance"))
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {activeSheet = .settings}) {
                             Label("Settings", systemImage: "gearshape")
                         }
+                    .help(Text("Settings"))
                 }
                 ToolbarItem(placement: .status) {
                     Button(action: {copyToClipBoard(textToCopy: document.text)}) {
                         Image(systemName: "doc.on.doc")
                     }
+                    .help(Text("Copy"))
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button(action: {activeSheet = .metadata}) {
                         Image(systemName: "info.circle")
                     }
+                    .help(Text("Metadata"))
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {activeSheet = .export}) {
                         Image(systemName: "square.and.arrow.up")
                     }
+                    .help(Text("Export"))
                 }
             }
             .sheet(item: $activeSheet) { item in

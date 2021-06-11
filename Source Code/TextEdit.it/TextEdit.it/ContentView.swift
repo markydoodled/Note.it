@@ -108,6 +108,7 @@ struct ContentView: View {
                         Text("Update")
                     }
                     .padding(.horizontal)
+                .help(Text("Update File Attributes"))
             }
             .listStyle(SidebarListStyle())
             GeometryReader { reader in
@@ -139,24 +140,30 @@ struct ContentView: View {
                 Button(action: {NSDocumentController().newDocument(Any?.self)}) {
                     Image(systemName: "plus")
                 }
+                .help(Text("New"))
                 Button(action: {NSDocumentController().openDocument(Any?.self)}) {
                     Image(systemName: "doc")
                 }
+                .help(Text("Open"))
                 Button(action: {NSApp.sendAction(#selector(NSDocument.save(_:)), to: nil, from: self)}) {
                     Image(systemName: "square.and.arrow.down")
                 }
+                .help(Text("Save"))
                 Button(action: {copyToClipBoard(textToCopy: document.text)}) {
                     Image(systemName: "doc.on.doc")
                 }
+                .help(Text("Copy"))
                 /* Button(action: {printDoc()}) {
                     Image(systemName: "printer")
                 } */
                 Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
                     Image(systemName: "folder")
                 }
+                .help(Text("Move To…"))
                 Button(action: {NSApp.sendAction(#selector(NSDocument.duplicate(_:)), to: nil, from: self)}) {
                     Image(systemName: "doc.badge.plus")
                 }
+                .help(Text("Duplicate"))
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
