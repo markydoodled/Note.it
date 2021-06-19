@@ -3,10 +3,9 @@
 
 This is a simple text editor for Mac that is mostly built with SwiftUI. It is designed to take up less resources and less storage, and be used in small quick bursts of writing or note taking. It uses its own proprietary .textedit document format (similar to .txt format).
 
-## **Latest Version**
+## **Releases**
 
-To download the latest stable version of the app, click the link:
-[Latest Release](https://github.com/markydoodled/TextEdit.it/releases/download/v1.1/TextEdit.it.app.zip)
+[Click Here...](https://github.com/markydoodled/Note.it/releases)
 
 ## **Features**
 
@@ -28,8 +27,7 @@ To download the latest stable version of the app, click the link:
 
 ## Images
 
-To view some screenshots, click here:
-[Images](https://github.com/markydoodled/Note.it/tree/main/Images)
+[Click Here...](https://github.com/markydoodled/Note.it/tree/main/Images)
 
 ## **Things To Note**
 
