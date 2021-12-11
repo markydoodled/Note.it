@@ -1,7 +1,7 @@
 # Note.it
 **About**
 
-This is a simple text editor for Mac that is mostly built with SwiftUI. It is designed to take up less resources and less storage, and be used in small quick bursts of writing or note taking. It uses its own proprietary .textedit document format (similar to .txt format).
+This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. It Is Designed To Take Up Less Resources And Less Storage, And Be Used In Small Quick Bursts Of Writing Or Note Taking. It Uses Its Own Proprietary .textedit Document Format (Similar To .txt Format).
 
 ## **Releases**
 
@@ -9,17 +9,17 @@ This is a simple text editor for Mac that is mostly built with SwiftUI. It is de
 
 ## **Features**
 
- - Easy to learn interface
- - Familiar text editing commands
- - Easy access to priority commands in the toolbar
- - Syntax highlighting
- - Support for editor themes
- - Ability to change some commands to custom key bindings
- - Support for both Intel and Apple Silicon Macs
- - More file formats
- - Export to other file formats
- - In-app Finder metadata integration for the document
- - An iOS/iPadOS version (possibly)
+ - Easy To Learn Interface
+ - Familiar Text Editing Commands
+ - Easy Access To Priority Commands In The Toolbar
+ - Syntax Highlighting
+ - Support For Editor Themes
+ - Ability To Change Some Commands To Custom Key Bindings
+ - Support For Both Intel And Apple Silicon Macs
+ - More File Formats
+ - Export To Other File Formats
+ - In-App Finder Metadata Integration For The Document
+ - An iOS/iPadOS Version
 
 ## **Features To Be Implemented**
 
@@ -31,6 +31,7 @@ This is a simple text editor for Mac that is mostly built with SwiftUI. It is de
 
 ## **Things To Note**
 
- 1. This project is free to be added to by the community, if you wish to help, file a issue with the enhancement tag
- 2. Any and all feedback will be helpful for future development
- 3. If you wish to report a bug, please use either the feedback button in the app or use GitHub issues.
+1. This Project Is Free To Be Added To By The Community, If You Wish To Help, File A Issue With The Enhancement Tag
+2. Any And All Feedback Will Be Helpful For Future Development
+3. If You Wish To Report A Bug, Please Use Either The Feedback Button In The App Or Use GitHub Issues
+4. On iOS, To Get Metadata For The File, It Must Be Placed In The Note.it Folder At The Top Level
