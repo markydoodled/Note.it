@@ -35,3 +35,12 @@ This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. 
 2. Any And All Feedback Will Be Helpful For Future Development
 3. If You Wish To Report A Bug, Please Use Either The Feedback Button In The App Or Use GitHub Issues
 4. On iOS, To Get Metadata For The File, It Must Be Placed In The Note.it Folder At The Top Level
+
+## **Credits**
+
+Thanks To These People Who Developed These Packages, Who Without This Project Would Not Be Possible:
+ 
+- wolfmcnally [SwiftUIPrint](https://github.com/wolfmcnally/SwiftUIPrint)
+- Pictarine [CodeMirror-SwiftUI](https://github.com/Pictarine/CodeMirror-SwiftUI)
+- sindresorhus [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) And [Preferences](https://github.com/sindresorhus/Preferences)
+
