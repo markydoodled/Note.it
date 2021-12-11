@@ -26,6 +26,7 @@
 		D5762E18264042420069A17F /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D5762E16264042420069A17F /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D5762E1E2640484D0069A17F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E1C264048490069A17F /* SettingsView.swift */; };
 		D5762E202640505D0069A17F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5762E1F2640505D0069A17F /* Settings.bundle */; };
+		D5F30FCA2763F8A80069631E /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = D5F30FC92763F8A80069631E /* SwiftUIPrint */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5F30FCA2763F8A80069631E /* SwiftUIPrint in Frameworks */,
 				D5762E17264042420069A17F /* CodeMirror-SwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,6 +212,7 @@
 			name = "Note.it iOS";
 			packageProductDependencies = (
 				D5762E16264042420069A17F /* CodeMirror-SwiftUI */,
+				D5F30FC92763F8A80069631E /* SwiftUIPrint */,
 			);
 			productName = "TextEdit.it iOS";
 			productReference = D5762E02264042110069A17F /* Note.it iOS.app */;
@@ -245,6 +248,7 @@
 				D559AB73261CBFED00C6E8FC /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */,
 				D50C75FB262DE1E400561E7A /* XCRemoteSwiftPackageReference "Preferences" */,
+				D5F30FC82763F8A70069631E /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 			);
 			productRefGroup = D5130CE025CEDE42001256A2 /* Products */;
 			projectDirPath = "";
@@ -428,7 +432,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -439,7 +443,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -455,7 +459,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -466,7 +470,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -479,7 +483,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_PREVIEWS = YES;
@@ -489,7 +493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -504,7 +508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_PREVIEWS = YES;
@@ -514,7 +518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -581,6 +585,14 @@
 				minimumVersion = 0.1.6;
 			};
 		};
+		D5F30FC82763F8A70069631E /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -603,6 +615,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
 			productName = "CodeMirror-SwiftUI";
+		};
+		D5F30FC92763F8A80069631E /* SwiftUIPrint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5F30FC82763F8A70069631E /* XCRemoteSwiftPackageReference "SwiftUIPrint" */;
+			productName = SwiftUIPrint;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1370,8 +1370,8 @@ struct MiscSettings: View {
                     HStack {
                         Spacer()
                         VStack {
-            Text("Version: 1.2")
-            Text("Build: 2")
+            Text("Version: 1.2.2")
+            Text("Build: 1")
                         }
                         Spacer()
                     }

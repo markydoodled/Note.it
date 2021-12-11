@@ -20,7 +20,7 @@
 			<key>Key</key>
 			<string>kVersion</string>
 			<key>DefaultValue</key>
-			<string>1.2</string>
+			<string>1.2.2</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -30,7 +30,7 @@
 			<key>Key</key>
 			<string>kBuild</string>
 			<key>DefaultValue</key>
-			<string>2</string>
+			<string>1</string>
 		</dict>
 	</array>
 </dict>

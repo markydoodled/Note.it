@@ -8,6 +8,7 @@
 import SwiftUI
 import CodeMirror_SwiftUI
 import UniformTypeIdentifiers
+import SwiftUIPrint
 
 struct ContentView: View {
     @Binding var document: TextEdit_it_iOSDocument
@@ -98,6 +99,13 @@ struct ContentView: View {
                         case .export:
                             NavigationView {
                                 VStack {
+                                    PrintSetup(page: VStack {
+                                        HStack {
+                                            Text(document.text)
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding())
                                 Text("Please Select A File Type To Export To: ")
                                     .bold()
                                     .padding()
@@ -403,6 +411,13 @@ struct ContentView: View {
                         case .export:
                             NavigationView {
                                 VStack {
+                                    PrintSetup(page: VStack {
+                                        HStack {
+                                            Text(document.text)
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding())
                                 Text("Please Select A File Type To Export To: ")
                                     .bold()
                                     .padding()
@@ -621,5 +636,21 @@ struct PickerList3: View {
         Text("Ruby Script").tag(22)
         Text("Perl Script").tag(23)
         Text("PHP Script").tag(24)
+    }
+}
+struct PrintSetup<Page>: View where Page: View {
+    let page: Page
+
+    var body: some View {
+            Button {
+                presentPrintInteractionController(page: page)
+            } label: {
+                Label("Print", systemImage: "printer")
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke(lineWidth: 2.0)
+                    )
+            }
     }
 }

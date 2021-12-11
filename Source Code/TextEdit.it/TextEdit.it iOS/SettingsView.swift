@@ -17,12 +17,12 @@ struct MiscSettings: View {
             HStack {
                 Text("Version: ")
                 Spacer()
-                Text("1.2")
+                Text("1.2.2")
             }
             HStack {
                 Text("Build: ")
                 Spacer()
-                Text("2")
+                Text("1")
             }
             HStack {
                 Text("Feedback: ")
