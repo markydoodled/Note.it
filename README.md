@@ -23,7 +23,7 @@ This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. 
 
 ## **Features To Be Implemented**
 
- - Any Suggestions?
+ - Any Suggestions...
 
 ## Images
 
