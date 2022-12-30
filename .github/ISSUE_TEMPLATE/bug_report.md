@@ -1,38 +1,36 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+name: Bug Report
+about: Create A Report To Help Us Improve
+title: Bug
+labels: bug
+assignees: markydoodled
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe The Bug**
+A Clear And Concise Description Of What The Bug Is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+Steps To Reproduce The Behaviour:
+1. Go To '...'
+2. Click On '....'
+3. Scroll Down To '....'
+4. See Error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Expected Behaviour**
+A Clear And Concise Description Of What You Expected To Happen.
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+If Applicable, Add Screenshots To Help Explain Your Problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
+**Desktop (Please Complete The Following Information):**
+ - OS: [e.g. macOS]
  - Version [e.g. 22]
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
+**Smartphone (Please Complete The Following Information):**
+ - Device: [e.g. iPhone 6]
+ - OS: [e.g. iOS 8.1]
  - Version [e.g. 22]
 
-**Additional context**
-Add any other context about the problem here.
+**Additional Context**
+Add Any Other Context About The Problem Here.
