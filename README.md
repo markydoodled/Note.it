@@ -1,5 +1,4 @@
 # Note.it
-**About**
 
 This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. It Is Designed To Take Up Less Resources And Less Storage, And Be Used In Small Quick Bursts Of Writing Or Note Taking. It Uses Its Own Proprietary .textedit Document Format (Similar To .txt Format).
 
@@ -20,10 +19,6 @@ This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. 
  - Export To Other File Formats
  - In-App Finder Metadata Integration For The Document
  - An iOS/iPadOS Version
-
-## **Features To Be Implemented**
-
- - Any Suggestions...
 
 ## Images
 
