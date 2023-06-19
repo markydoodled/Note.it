@@ -11,11 +11,13 @@ This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is
  - Easy Access To Priority Commands In The Toolbar
  - Syntax Highlighting
  - Support For Editor Themes
- - Ability To Change Some Commands To Custom Key Bindings
- - Support For Both Intel And Apple Silicon Macs
- - More File Formats
- - Export To Common File Formats
- - In-App Finder Metadata Integration For The Document
+ - Line Numbers
+ - TouchBar Support
+ - Force Either Light Or Dark Mode
+ - Ability To Change Main Commands To Custom Key Bindings
+ - Read More File Formats
+ - Export To Common Text File Formats
+ - In-App File Metadata Integration
 
 ## Releases
 
