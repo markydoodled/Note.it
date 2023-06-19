@@ -2,12 +2,10 @@
 
 This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is Built With SwiftUI. It Is Designed To Be Very Efficient And Take Up As Little Resources/Storage As Possible. It's Ideal To Be Used In More Mobile And On-The-Go Situations For Quick Bursts Of Coding Or Note Taking.
 
-## Releases
-
-[Click Here...](https://github.com/markydoodled/Note.it/releases)
-
 ## Features
 
+ - iOS/iPadOS App
+ - macOS App
  - Easy To Learn Interface
  - Familiar Text Editing Commands
  - Easy Access To Priority Commands In The Toolbar
@@ -16,9 +14,12 @@ This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is
  - Ability To Change Some Commands To Custom Key Bindings
  - Support For Both Intel And Apple Silicon Macs
  - More File Formats
- - Export To Other File Formats
+ - Export To Common File Formats
  - In-App Finder Metadata Integration For The Document
- - An iOS/iPadOS Version
+
+## Releases
+
+[Click Here...](https://github.com/markydoodled/Note.it/releases)
 
 ## Things To Note
 
