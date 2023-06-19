@@ -1,12 +1,12 @@
 # Note.it
 
-This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. It Is Designed To Take Up Less Resources And Less Storage, And Be Used In Small Quick Bursts Of Writing Or Note Taking. It Uses Its Own Proprietary .textedit Document Format (Similar To .txt Format).
+This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is Built With SwiftUI. It Is Designed To Be Very Efficient And Take Up As Little Resources/Storage As Possible. It's Ideal To Be Used In More Mobile And On-The-Go Situations For Quick Bursts Of Coding Or Note Taking.
 
-## **Releases**
+## Releases
 
 [Click Here...](https://github.com/markydoodled/Note.it/releases)
 
-## **Features**
+## Features
 
  - Easy To Learn Interface
  - Familiar Text Editing Commands
@@ -20,18 +20,14 @@ This Is A Simple Text Editor For Mac And iOS That Is Mostly Built With SwiftUI. 
  - In-App Finder Metadata Integration For The Document
  - An iOS/iPadOS Version
 
-## Images
-
-[Click Here...](https://github.com/markydoodled/Note.it/tree/main/Images)
-
-## **Things To Note**
+## Things To Note
 
 1. This Project Is Free To Be Added To By The Community, If You Wish To Help, File A Issue With The Enhancement Tag
 2. Any And All Feedback Will Be Helpful For Future Development
 3. If You Wish To Report A Bug, Please Use Either The Feedback Button In The App Or Use GitHub Issues
 4. On iOS, To Get Metadata For The File, It Must Be Placed In The Note.it Folder At The Top Level
 
-## **Credits**
+## Credits
 
 Thanks To These People Who Developed These Packages, Who Without This Project Would Not Be Possible:
  
