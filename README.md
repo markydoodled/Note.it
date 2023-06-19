@@ -15,7 +15,7 @@ This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is
  - TouchBar Support
  - Force Either Light Or Dark Mode
  - Ability To Change Main Commands To Custom Key Bindings
- - Read More File Formats
+ - Read Common File Formats
  - Export To Common Text File Formats
  - In-App File Metadata Integration
 
