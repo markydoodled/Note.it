@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "codemirror-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Pictarine/CodeMirror-SwiftUI.git",
+      "state" : {
+        "revision" : "91eb30d2ea54c136de2540cacaeb95b9ab5de8e0",
+        "version" : "0.1.6"
+      }
+    },
+    {
+      "identity" : "keyboardshortcuts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/KeyboardShortcuts.git",
+      "state" : {
+        "revision" : "0d77aa6851615007a84c9ca77c420dbd13bbad8a",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "preferences",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/Preferences.git",
+      "state" : {
+        "revision" : "ffeaaad1def45d0625720dc1adae3789cd9c167d",
+        "version" : "2.5.0"
+      }
+    },
+    {
+      "identity" : "swiftuiprint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wolfmcnally/SwiftUIPrint",
+      "state" : {
+        "revision" : "06e1953ceff40c08a0e899e604658f2c38358c3e",
+        "version" : "2.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}

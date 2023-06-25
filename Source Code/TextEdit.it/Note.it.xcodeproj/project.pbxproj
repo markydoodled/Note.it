@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,7 +26,6 @@
 		D5762E18264042420069A17F /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D5762E16264042420069A17F /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D5762E1E2640484D0069A17F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5762E1C264048490069A17F /* SettingsView.swift */; };
 		D5762E202640505D0069A17F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5762E1F2640505D0069A17F /* Settings.bundle */; };
-		D5F30FCA2763F8A80069631E /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = D5F30FC92763F8A80069631E /* SwiftUIPrint */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5F30FCA2763F8A80069631E /* SwiftUIPrint in Frameworks */,
 				D5762E17264042420069A17F /* CodeMirror-SwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,7 +210,6 @@
 			name = "Note.it iOS";
 			packageProductDependencies = (
 				D5762E16264042420069A17F /* CodeMirror-SwiftUI */,
-				D5F30FC92763F8A80069631E /* SwiftUIPrint */,
 			);
 			productName = "TextEdit.it iOS";
 			productReference = D5762E02264042110069A17F /* Note.it iOS.app */;
@@ -224,8 +221,9 @@
 		D5130CD725CEDE42001256A2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					D5130CDE25CEDE42001256A2 = {
 						CreatedOnToolsVersion = 12.4;
@@ -235,7 +233,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D5130CDA25CEDE42001256A2 /* Build configuration list for PBXProject "TextEdit.it" */;
+			buildConfigurationList = D5130CDA25CEDE42001256A2 /* Build configuration list for PBXProject "Note.it" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -248,7 +246,7 @@
 				D559AB73261CBFED00C6E8FC /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */,
 				D50C75FB262DE1E400561E7A /* XCRemoteSwiftPackageReference "Preferences" */,
-				D5F30FC82763F8A70069631E /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
+				D5677FBB2A40ED5700112692 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 			);
 			productRefGroup = D5130CE025CEDE42001256A2 /* Products */;
 			projectDirPath = "";
@@ -342,6 +340,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -359,7 +358,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -403,6 +403,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -414,7 +415,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -432,18 +434,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TextEdit.it/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -459,18 +463,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"TextEdit.it/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWASU9HFBU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TextEdit.it/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MSJ.TextEdit-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -531,7 +537,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D5130CDA25CEDE42001256A2 /* Build configuration list for PBXProject "TextEdit.it" */ = {
+		D5130CDA25CEDE42001256A2 /* Build configuration list for PBXProject "Note.it" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5130CEF25CEDE44001256A2 /* Debug */,
@@ -585,12 +591,12 @@
 				minimumVersion = 0.1.6;
 			};
 		};
-		D5F30FC82763F8A70069631E /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
+		D5677FBB2A40ED5700112692 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -615,11 +621,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D559AB76261CC34400C6E8FC /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
 			productName = "CodeMirror-SwiftUI";
-		};
-		D5F30FC92763F8A80069631E /* SwiftUIPrint */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D5F30FC82763F8A70069631E /* XCRemoteSwiftPackageReference "SwiftUIPrint" */;
-			productName = SwiftUIPrint;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
