@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D5498DCD2A48B0FF00C1ECFD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5498DCC2A48B0FF00C1ECFD /* SettingsView.swift */; };
 		D5498DCF2A48B11100C1ECFD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5498DCE2A48B11100C1ECFD /* Settings.bundle */; };
+		D55937B42A4C8640008F1AEF /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */; };
+		D55937B52A4C869E008F1AEF /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D5677FC92A40EE1900112692 /* Note_itApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5677FC82A40EE1900112692 /* Note_itApp.swift */; };
 		D5677FCB2A40EE1900112692 /* Note_itDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5677FCA2A40EE1900112692 /* Note_itDocument.swift */; };
 		D5677FCD2A40EE1900112692 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5677FCC2A40EE1900112692 /* ContentView.swift */; };
@@ -21,6 +23,20 @@
 		D5677FE92A41016B00112692 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5677FE82A41016B00112692 /* Assets.xcassets */; };
 		D5677FEC2A41016B00112692 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5677FEB2A41016B00112692 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D55937A82A48D15D008F1AEF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D55937B52A4C869E008F1AEF /* CodeMirror-SwiftUI in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D5498DCC2A48B0FF00C1ECFD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -48,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D55937B42A4C8640008F1AEF /* CodeMirror-SwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +152,7 @@
 				D5677FC12A40EE1900112692 /* Sources */,
 				D5677FC22A40EE1900112692 /* Frameworks */,
 				D5677FC32A40EE1900112692 /* Resources */,
+				D55937A82A48D15D008F1AEF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -142,6 +160,7 @@
 			);
 			name = Note.it;
 			packageProductDependencies = (
+				D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */,
 			);
 			productName = Note.it;
 			productReference = D5677FC52A40EE1900112692 /* Note.it.app */;
@@ -192,6 +211,7 @@
 			);
 			mainGroup = D5677FBC2A40EE1900112692;
 			packageReferences = (
+				D55937B22A4C8640008F1AEF /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */,
 			);
 			productRefGroup = D5677FC62A40EE1900112692 /* Products */;
 			projectDirPath = "";
@@ -532,6 +552,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D55937B22A4C8640008F1AEF /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Pictarine/CodeMirror-SwiftUI.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D55937B22A4C8640008F1AEF /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
+			productName = "CodeMirror-SwiftUI";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D5677FBD2A40EE1900112692 /* Project object */;
 }
