@@ -11,6 +11,9 @@
 		D5498DCF2A48B11100C1ECFD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5498DCE2A48B11100C1ECFD /* Settings.bundle */; };
 		D55937B42A4C8640008F1AEF /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */; };
 		D55937B52A4C869E008F1AEF /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D55937BB2A54AF46008F1AEF /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = D55937BA2A54AF46008F1AEF /* SwiftUIPrint */; };
+		D55937BE2A54B137008F1AEF /* CodeMirror-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D55937BD2A54B137008F1AEF /* CodeMirror-SwiftUI */; };
+		D55937BF2A54B137008F1AEF /* CodeMirror-SwiftUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D55937BD2A54B137008F1AEF /* CodeMirror-SwiftUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D5677FC92A40EE1900112692 /* Note_itApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5677FC82A40EE1900112692 /* Note_itApp.swift */; };
 		D5677FCB2A40EE1900112692 /* Note_itDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5677FCA2A40EE1900112692 /* Note_itDocument.swift */; };
 		D5677FCD2A40EE1900112692 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5677FCC2A40EE1900112692 /* ContentView.swift */; };
@@ -32,6 +35,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D55937B52A4C869E008F1AEF /* CodeMirror-SwiftUI in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D55937C02A54B137008F1AEF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D55937BF2A54B137008F1AEF /* CodeMirror-SwiftUI in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,18 +86,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D55937BE2A54B137008F1AEF /* CodeMirror-SwiftUI in Frameworks */,
+				D55937BB2A54AF46008F1AEF /* SwiftUIPrint in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D55937BC2A54B137008F1AEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D5677FBC2A40EE1900112692 = {
 			isa = PBXGroup;
 			children = (
 				D5677FC72A40EE1900112692 /* Note.it */,
 				D5677FE12A41016A00112692 /* Note.it iOS */,
 				D5677FC62A40EE1900112692 /* Products */,
+				D55937BC2A54B137008F1AEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,12 +197,17 @@
 				D5677FDC2A41016A00112692 /* Sources */,
 				D5677FDD2A41016A00112692 /* Frameworks */,
 				D5677FDE2A41016A00112692 /* Resources */,
+				D55937C02A54B137008F1AEF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Note.it iOS";
+			packageProductDependencies = (
+				D55937BA2A54AF46008F1AEF /* SwiftUIPrint */,
+				D55937BD2A54B137008F1AEF /* CodeMirror-SwiftUI */,
+			);
 			productName = "Note.it iOS";
 			productReference = D5677FE02A41016A00112692 /* Note.it iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +241,7 @@
 			mainGroup = D5677FBC2A40EE1900112692;
 			packageReferences = (
 				D55937B22A4C8640008F1AEF /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */,
+				D55937B92A54AF46008F1AEF /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 			);
 			productRefGroup = D5677FC62A40EE1900112692 /* Products */;
 			projectDirPath = "";
@@ -562,10 +592,28 @@
 				kind = branch;
 			};
 		};
+		D55937B92A54AF46008F1AEF /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		D55937B32A4C8640008F1AEF /* CodeMirror-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D55937B22A4C8640008F1AEF /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
+			productName = "CodeMirror-SwiftUI";
+		};
+		D55937BA2A54AF46008F1AEF /* SwiftUIPrint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D55937B92A54AF46008F1AEF /* XCRemoteSwiftPackageReference "SwiftUIPrint" */;
+			productName = SwiftUIPrint;
+		};
+		D55937BD2A54B137008F1AEF /* CodeMirror-SwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D55937B22A4C8640008F1AEF /* XCRemoteSwiftPackageReference "CodeMirror-SwiftUI" */;
 			productName = "CodeMirror-SwiftUI";

@@ -110,6 +110,7 @@ struct ContentView: View {
                             Label("Update Metadata", systemImage: "arrow.counterclockwise")
                         }
                         .help("Update Metadata")
+                        .keyboardShortcut("r")
                     }
                     ToolbarItem(id: "change-appearance", placement: .status) {
                         Menu {
@@ -150,6 +151,7 @@ struct ContentView: View {
                             Label("Copy", systemImage: "text.badge.plus")
                         }
                         .help("Copy Text")
+                        .keyboardShortcut("c", modifiers: [.command, .shift])
                     }
                     ToolbarItem(id: "move-doc", placement: .secondaryAction) {
                         Button(action: {NSApp.sendAction(#selector(NSDocument.move(_:)), to: nil, from: self)}) {
@@ -248,7 +250,7 @@ extension URL {
         do {
             return try FileManager.default.attributesOfItem(atPath: path)
         } catch let error as NSError {
-            print("FileAttribute error: \(error)")
+            print("FileAttribute Error: \(error)")
         }
         return nil
     }
