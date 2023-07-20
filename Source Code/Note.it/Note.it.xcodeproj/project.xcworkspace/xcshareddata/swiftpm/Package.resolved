@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "codemirror-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Pictarine/CodeMirror-SwiftUI.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "91eb30d2ea54c136de2540cacaeb95b9ab5de8e0"
+      }
+    },
+    {
+      "identity" : "swiftuiprint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wolfmcnally/SwiftUIPrint.git",
+      "state" : {
+        "revision" : "06e1953ceff40c08a0e899e604658f2c38358c3e",
+        "version" : "2.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}
