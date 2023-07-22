@@ -12,9 +12,12 @@ import CodeMirror_SwiftUI
 
 struct ContentView: View {
     @Binding var document: Note_it_iOSDocument
+    
     @Environment(\.undoManager) var undoManager
+    
     @State var editor = EditorSettings()
     @State var themes = ThemesSettings()
+    
     @State var fileURL: URL
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
@@ -31,11 +34,12 @@ struct ContentView: View {
         bcf.countStyle = .file
         return bcf
     }()
+    
     @State var showingExport = false
-    @State var contentTypeSelection = UTType.plainText
-    @State var pickerExportSelection = 1
+    @State var showingPrinting = false
     @State var activeSheet: ActiveSheet?
     @AppStorage("selectedAppearance") var selectedAppearance = 3
+    
     @State var isShowingSwiftSourceExport = false
     @State var isShowingPlainTextExport = false
     @State var isShowingXMLExport = false
@@ -56,8 +60,6 @@ struct ContentView: View {
     @State var isShowingRubyScriptExport = false
     @State var isShowingPerlScriptExport = false
     @State var isShowingPHPScriptExport = false
-    @State var exportAsSelection = 1
-    @State var showingPrinting = false
     var body: some View {
         CodeView(theme: themes.theme, code: $document.text, mode: themes.syntax.mode(), fontSize: editor.fontSize, showInvisibleCharacters: editor.showInvisibleCharacters, lineWrapping: editor.lineWrapping)
             .onLoadSuccess {
@@ -423,6 +425,7 @@ struct ContentView: View {
                 Button(action: {showingPrinting = true}) {
                     Image(systemName: "printer")
                 }
+                .help("Print")
                 .sheet(isPresented: $showingPrinting) {
                     SamplePrintSetup(page:
                         VStack {
@@ -447,6 +450,7 @@ struct ContentView: View {
         let fileextension = fileURL.pathExtension
         let filePath = fileURL.path
         let fileName = fileURL.deletingPathExtension().lastPathComponent
+        
         fileNameAttribute = fileName
         filePathAttribute = filePath
         fileExtensionAttribute = fileextension
@@ -458,7 +462,9 @@ struct ContentView: View {
     }
     func getDirList() {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
         guard let directoryURL = URL(string: paths.path) else { return }
+        
         do {
            let contents = try FileManager.default.contentsOfDirectory(at: directoryURL, includingPropertiesForKeys:[.contentAccessDateKey], options: [.skipsHiddenFiles])
                 .sorted(by: {

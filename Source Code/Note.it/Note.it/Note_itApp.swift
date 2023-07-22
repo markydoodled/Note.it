@@ -31,6 +31,7 @@ struct Note_itApp: App {
 
 struct ExportCommandView: View {
     @FocusedBinding(\.document) var document
+    
     @State var isShowingSwiftSourceExport = false
     @State var isShowingPlainTextExport = false
     @State var isShowingXMLExport = false

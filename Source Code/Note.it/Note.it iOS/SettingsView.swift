@@ -1298,6 +1298,7 @@ struct MailView: UIViewControllerRepresentable {
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         @Binding var isShowing: Bool
         @Binding var result: Result<MFMailComposeResult, Error>?
+        
         init(isShowing: Binding<Bool>, result: Binding<Result<MFMailComposeResult, Error>?>) {
             _isShowing = isShowing
             _result = result
@@ -1307,10 +1308,12 @@ struct MailView: UIViewControllerRepresentable {
             defer {
                 isShowing = false
             }
+            
             guard error == nil else {
                 self.result = .failure(error!)
                 return
             }
+            
             self.result = .success(result)
         }
     }
