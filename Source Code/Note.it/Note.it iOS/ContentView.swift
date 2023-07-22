@@ -427,16 +427,27 @@ struct ContentView: View {
                 }
                 .help("Print")
                 .sheet(isPresented: $showingPrinting) {
-                    SamplePrintSetup(page:
-                        VStack {
-                            HStack {
-                                Text(document.text)
+                    NavigationStack {
+                        SamplePrintSetup(page:
+                            VStack {
+                                HStack {
+                                    Text(document.text)
+                                    Spacer()
+                                }
                                 Spacer()
                             }
-                            Spacer()
+                            .padding()
+                        )
+                        .navigationTitle("Print")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {showingPrinting = false}) {
+                                    Text("Done")
+                                }
+                            }
                         }
-                        .padding()
-                    )
+                    }
                 }
             }
         }
