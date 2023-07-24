@@ -11,14 +11,10 @@ import CodeMirror_SwiftUI
 
 struct ContentView: View {
     @Binding var document: Note_itDocument
+    
     @State var editor = EditorSettings()
     @State var themes = ThemeSettings()
-    private let fileByteCountFormatter: ByteCountFormatter = {
-        let bcf = ByteCountFormatter()
-        bcf.allowedUnits = [.useAll]
-        bcf.countStyle = .file
-        return bcf
-    }()
+    
     @State var fileURL: URL
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
@@ -28,6 +24,13 @@ struct ContentView: View {
     @State var fileExtensionAttribute: String
     @State var fileOwnerAttribute: String
     @State var filePathAttribute: String
+    private let fileByteCountFormatter: ByteCountFormatter = {
+        let bcf = ByteCountFormatter()
+        bcf.allowedUnits = [.useAll]
+        bcf.countStyle = .file
+        return bcf
+    }()
+    
     @AppStorage("selectedAppearance") var selectedAppearance = 3
     var body: some View {
         NavigationSplitView {
@@ -223,6 +226,7 @@ struct ContentView: View {
         let size = fileURL.fileSize
         let fileextension = fileURL.pathExtension
         let filePath = fileURL.path
+        
         filePathAttribute = filePath
         fileExtensionAttribute = fileextension
         fileSizeAttribute = Int64(size)
@@ -235,7 +239,6 @@ struct ContentView: View {
         let pasteBoard = NSPasteboard.general
         pasteBoard.clearContents()
         pasteBoard.setString(textToCopy, forType: .string)
-
     }
 }
 

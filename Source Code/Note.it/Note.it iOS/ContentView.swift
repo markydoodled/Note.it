@@ -12,9 +12,12 @@ import CodeMirror_SwiftUI
 
 struct ContentView: View {
     @Binding var document: Note_it_iOSDocument
+    
     @Environment(\.undoManager) var undoManager
+    
     @State var editor = EditorSettings()
     @State var themes = ThemesSettings()
+    
     @State var fileURL: URL
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
@@ -31,11 +34,10 @@ struct ContentView: View {
         bcf.countStyle = .file
         return bcf
     }()
-    @State var showingExport = false
-    @State var contentTypeSelection = UTType.plainText
-    @State var pickerExportSelection = 1
+    
     @State var activeSheet: ActiveSheet?
     @AppStorage("selectedAppearance") var selectedAppearance = 3
+    
     @State var isShowingSwiftSourceExport = false
     @State var isShowingPlainTextExport = false
     @State var isShowingXMLExport = false
@@ -56,19 +58,15 @@ struct ContentView: View {
     @State var isShowingRubyScriptExport = false
     @State var isShowingPerlScriptExport = false
     @State var isShowingPHPScriptExport = false
-    @State var exportAsSelection = 1
-    @State var showingPrinting = false
     var body: some View {
         CodeView(theme: themes.theme, code: $document.text, mode: themes.syntax.mode(), fontSize: editor.fontSize, showInvisibleCharacters: editor.showInvisibleCharacters, lineWrapping: editor.lineWrapping)
             .onLoadSuccess {
-                getDirList()
                 getAttributes()
             }
             .onLoadFail { error in
                 print("Load Failed: \(error.localizedDescription)")
             }
             .onContentChange { change in
-                getDirList()
                 getAttributes()
             }
             .onAppear {
@@ -168,27 +166,20 @@ struct ContentView: View {
     }
     var metadata: some View {
         Form {
-            Label("Title - \(fileNameAttribute)", systemImage: "textformat")
-            Label("Extension - \(fileExtensionAttribute)", systemImage: "square.grid.3x1.folder.badge.plus")
-            Label("Size - \(fileByteCountFormatter.string(fromByteCount: fileSizeAttribute))", systemImage: "externaldrive")
-            Label("Path - \(filePathAttribute)", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
-            Label("Owner - \(fileOwnerAttribute)", systemImage: "person")
-            Label("Created - \(fileCreatedAttribute.formatted(.dateTime))", systemImage: "calendar.badge.plus")
-            Label("Modified - \(fileModifiedAttribute.formatted(.dateTime))", systemImage: "calendar.badge.clock")
-            Label("File Type - \(fileTypeAttribute)", systemImage: "doc")
-        }
-        .navigationTitle("Metadata")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    getDirList()
-                    getAttributes()
-                }) {
-                    Label("Update Metadata", systemImage: "arrow.counterclockwise")
-                }
-                .help("Update Metadata")
+            Section {
+                Label("Title - \(fileNameAttribute)", systemImage: "textformat")
+                Label("Extension - \(fileExtensionAttribute)", systemImage: "square.grid.3x1.folder.badge.plus")
+                Label("Size - \(fileByteCountFormatter.string(fromByteCount: fileSizeAttribute))", systemImage: "externaldrive")
+                Label("Path - \(filePathAttribute)", systemImage: "point.topleft.down.curvedto.point.bottomright.up")
+                Label("Owner - \(fileOwnerAttribute)", systemImage: "person")
+                Label("Created - \(fileCreatedAttribute.formatted(.dateTime))", systemImage: "calendar.badge.plus")
+                Label("Modified - \(fileModifiedAttribute.formatted(.dateTime))", systemImage: "calendar.badge.clock")
+                Label("File Type - \(fileTypeAttribute)", systemImage: "doc")
+            } footer: {
+                Text("Metadata Generated From Last Time The File Was Opened")
             }
         }
+        .navigationTitle("Metadata")
     }
     var export: some View {
         Form {
@@ -420,11 +411,7 @@ struct ContentView: View {
         .navigationTitle("Export")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {showingPrinting = true}) {
-                    Image(systemName: "printer")
-                }
-                .sheet(isPresented: $showingPrinting) {
-                    SamplePrintSetup(page:
+                PrintSetup(page:
                         VStack {
                             HStack {
                                 Text(document.text)
@@ -433,8 +420,8 @@ struct ContentView: View {
                             Spacer()
                         }
                         .padding()
-                    )
-                }
+                )
+                .help("Print")
             }
         }
     }
@@ -447,6 +434,7 @@ struct ContentView: View {
         let fileextension = fileURL.pathExtension
         let filePath = fileURL.path
         let fileName = fileURL.deletingPathExtension().lastPathComponent
+        
         fileNameAttribute = fileName
         filePathAttribute = filePath
         fileExtensionAttribute = fileextension
@@ -455,26 +443,6 @@ struct ContentView: View {
         fileTypeAttribute = type
         fileModifiedAttribute = modificationDate!
         fileCreatedAttribute = creationDate!
-    }
-    func getDirList() {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        guard let directoryURL = URL(string: paths.path) else { return }
-        do {
-           let contents = try FileManager.default.contentsOfDirectory(at: directoryURL, includingPropertiesForKeys:[.contentAccessDateKey], options: [.skipsHiddenFiles])
-                .sorted(by: {
-                    let date0 = try $0.promisedItemResourceValues(forKeys:[.contentAccessDateKey]).contentAccessDate!
-                    let date1 = try $1.promisedItemResourceValues(forKeys:[.contentAccessDateKey]).contentAccessDate!
-                    return date0.compare(date1) == .orderedAscending
-                })
-          
-            for item in contents {
-                guard let t = try? item.promisedItemResourceValues(forKeys:[.contentAccessDateKey]).contentAccessDate else { return }
-                print("\(t) \(item.lastPathComponent)")
-                fileURL = item
-            }
-        } catch {
-            print(error)
-        }
     }
     private func copyToClipBoard(textToCopy: String) {
         let paste = UIPasteboard.general
@@ -538,5 +506,14 @@ extension UIApplication {
             .first(where: { $0 is UIWindowScene })
             .flatMap({ $0 as? UIWindowScene })?.windows
             .first(where: \.isKeyWindow)
+    }
+}
+
+struct PrintSetup<Page>: View where Page: View {
+    let page: Page
+    var body: some View {
+        Button(action: {presentPrintInteractionController(page: page)}) {
+            Image(systemName: "printer")
+        }
     }
 }

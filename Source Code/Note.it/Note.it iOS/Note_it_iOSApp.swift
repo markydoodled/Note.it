@@ -11,7 +11,7 @@ import SwiftUI
 struct Note_it_iOSApp: App {
     var body: some Scene {
         DocumentGroup(newDocument: Note_it_iOSDocument()) { file in
-            ContentView(document: file.$document, fileURL: URL(string: "/")!, fileTypeAttribute: "N/A", fileSizeAttribute: 0, fileTitleAtribute: "N/A", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "N/A", fileOwnerAttribute: "N/A", fileNameAttribute: "N/A", filePathAttribute: "N/A")
+            ContentView(document: file.$document, fileURL: file.fileURL!, fileTypeAttribute: "N/A", fileSizeAttribute: 0, fileTitleAtribute: "N/A", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "N/A", fileOwnerAttribute: "N/A", fileNameAttribute: "N/A", filePathAttribute: "N/A")
         }
     }
 }
