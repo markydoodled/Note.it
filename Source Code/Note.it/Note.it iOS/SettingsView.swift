@@ -49,6 +49,9 @@ struct ThemesSettings: View {
     @AppStorage("theme") var theme: CodeViewTheme = CodeViewTheme.zenburnesque
     var body: some View {
         Section {
+            CodeView(theme: theme, code: .constant("Hello World"), mode: syntax.mode(), fontSize: 12, showInvisibleCharacters: false, lineWrapping: false)
+        }
+        Section {
             Picker(selection: $selectedTheme, label: Text("Theme")) {
                 Group {
                     Group {
