@@ -1,6 +1,6 @@
 # Note.it
 
-This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is Built With SwiftUI. It Is Designed To Be Very Efficient And Take Up As Little Resources/Storage As Possible. It's Ideal To Be Used In More Mobile And On-The-Go Situations For Quick Bursts Of Coding Or Note Taking.
+This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is Built With SwiftUI. It Is Designed To Be Very Efficient And Take Up As Little Resources/Storage As Possible. It's Ideal To Be Used In More Mobile And On-The-Go Situations For Quick Bursts Of Coding, Text Editing Or Note Taking.
 
 ## Features
 
@@ -10,13 +10,12 @@ This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is
  - Familiar Text Editing Commands
  - Easy Access To Priority Commands In The Toolbar
  - Syntax Highlighting
- - Support For Editor Themes
+ - Editor Themes
  - Line Numbers
  - TouchBar Support
- - Force Either Light Or Dark Mode
- - Ability To Change Main Commands To Custom Key Bindings
- - Read Common File Formats
- - Export To Common Text File Formats
+ - Force Light Or Dark Mode
+ - Read Common Code Formats
+ - Export To Common Code File Formats
  - In-App File Metadata Integration
 
 ## Releases
@@ -28,7 +27,6 @@ This Is A Simple Developer Focused Code Editor For macOS, iOS And iPadOS That Is
 1. This Project Is Free To Be Added To By The Community, If You Wish To Help, File A Issue With The Enhancement Tag
 2. Any And All Feedback Will Be Helpful For Future Development
 3. If You Wish To Report A Bug, Please Use Either The Feedback Button In The App Or Use GitHub Issues
-4. On iOS, To Get Metadata For The File, It Must Be Placed In The Note.it Folder At The Top Level
 
 ## Credits
 
@@ -36,5 +34,4 @@ Thanks To These People Who Developed These Packages, Who Without This Project Wo
  
 - wolfmcnally [SwiftUIPrint](https://github.com/wolfmcnally/SwiftUIPrint)
 - Pictarine [CodeMirror-SwiftUI](https://github.com/Pictarine/CodeMirror-SwiftUI)
-- sindresorhus [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) And [Preferences](https://github.com/sindresorhus/Preferences)
 
