@@ -9,8 +9,10 @@ import SwiftUI
 import CodeMirror_SwiftUI
 
 struct SettingsView: View {
+    //Track Tab Selection
     @State var tabSelection = 1
     var body: some View {
+        //Set Tab View Between Settings Pages
         TabView(selection: $tabSelection) {
             EditorSettings()
                 .tabItem {
@@ -32,8 +34,10 @@ struct SettingsView: View {
                 .tag(3)
         }
     }
+    //Misc Settings Page
     var misc: some View {
         Form {
+            //App Info
             GroupBox(label: Label("Info", systemImage: "info.circle")) {
                 VStack {
                     HStack {
@@ -48,6 +52,7 @@ struct SettingsView: View {
                     }
                 }
             }
+            //App Feedback Button
             GroupBox(label: Label("Feedback", systemImage: "questionmark.bubble")) {
                 VStack {
                     HStack {
@@ -70,14 +75,17 @@ struct SettingsView: View {
 }
 
 struct ThemeSettings: View {
+    //Store Selected Syntax Highlighting And Editor Theme In User Defaults
     @AppStorage("selectedSyntax") var selectedSyntax = 51
     @AppStorage("selectedTheme") var selectedTheme = 80
     @AppStorage("syntax") var syntax: CodeMode = CodeMode.text
     @AppStorage("theme") var theme: CodeViewTheme = CodeViewTheme.zenburnesque
     var body: some View {
         Form {
+            //Testing View
             CodeView(theme: theme, code: .constant("Hello World"), mode: syntax.mode(), fontSize: 12, showInvisibleCharacters: false, lineWrapping: false)
                 .padding(.bottom)
+            //Theme Picker
             Picker(selection: $selectedTheme, label: Text("Theme")) {
                 Group {
                     Group {
@@ -533,6 +541,7 @@ struct ThemeSettings: View {
                 }
             }
             .pickerStyle(.menu)
+            //Check For Theme Changes
             .onChange(of: selectedTheme) { themeValue in
                 if themeValue == 1 {
                     self.theme = CodeViewTheme.bbedit
@@ -856,6 +865,7 @@ struct ThemeSettings: View {
                     self.theme = CodeViewTheme.irWhite
                 }
             }
+            //Syntax Picker
             Picker(selection: $selectedSyntax, label: Text("Syntax")) {
                 Group {
                     Button(action: {}) {
@@ -1111,6 +1121,7 @@ struct ThemeSettings: View {
                 }
             }
             .pickerStyle(.menu)
+            //Check For Syntax Changes
             .onChange(of: selectedSyntax) { syntax in
                 if syntax == 1 {
                     self.syntax = CodeMode.apl
@@ -1299,12 +1310,14 @@ struct ThemeSettings: View {
 }
 
 struct EditorSettings: View {
+    //Store Editor Settings In User Defaults
     @AppStorage("lineWrapping") var lineWrapping = true
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
     var body: some View {
         Form {
             GroupBox(label: Label("Options", systemImage: "slider.horizontal.3")) {
+                //Change Font Size, Toggle Line Wrapping And Toggle Invisible Characters
                 VStack {
                     HStack {
                         Spacer()
@@ -1332,6 +1345,7 @@ struct SettingsView_Previews: PreviewProvider {
     }
 }
 
+//Set Default Information For Sending Feedback Email
 class SendEmail: NSObject {
     static func send() {
         let service = NSSharingService(named: NSSharingService.Name.composeEmail)!

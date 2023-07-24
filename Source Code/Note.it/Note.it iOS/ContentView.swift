@@ -11,13 +11,17 @@ import SwiftUIPrint
 import CodeMirror_SwiftUI
 
 struct ContentView: View {
+    //Load In Document
     @Binding var document: Note_it_iOSDocument
     
+    //Load Undo/Redo Manager
     @Environment(\.undoManager) var undoManager
     
+    //Load In Editor And Theme Settings
     @State var editor = EditorSettings()
     @State var themes = ThemesSettings()
     
+    //Create Metadata Stores
     @State var fileURL: URL
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
@@ -35,9 +39,12 @@ struct ContentView: View {
         return bcf
     }()
     
+    //Setup The Multi Sheet Tracker
     @State var activeSheet: ActiveSheet?
+    //Setup Appearance Tracker
     @AppStorage("selectedAppearance") var selectedAppearance = 3
     
+    //Setup File Exporter Sheet Trackers
     @State var isShowingSwiftSourceExport = false
     @State var isShowingPlainTextExport = false
     @State var isShowingXMLExport = false
@@ -59,16 +66,21 @@ struct ContentView: View {
     @State var isShowingPerlScriptExport = false
     @State var isShowingPHPScriptExport = false
     var body: some View {
+        //Code Editor View
         CodeView(theme: themes.theme, code: $document.text, mode: themes.syntax.mode(), fontSize: editor.fontSize, showInvisibleCharacters: editor.showInvisibleCharacters, lineWrapping: editor.lineWrapping)
+        //On Editor Load Get File Attributes
             .onLoadSuccess {
                 getAttributes()
             }
+        //Error If The Editor Fails To Load
             .onLoadFail { error in
                 print("Load Failed: \(error.localizedDescription)")
             }
+        //Refetch The Attributes If The Document Contents Is Changed
             .onContentChange { change in
                 getAttributes()
             }
+        //Set The Appearance On View Load
             .onAppear {
                 if selectedAppearance == 1 {
                     UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .light
@@ -78,6 +90,7 @@ struct ContentView: View {
                     UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .unspecified
                 }
             }
+        //Change The App Appearance If The Picker Changes
             .onChange(of: selectedAppearance) { app in
                 if selectedAppearance == 1 {
                     UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .light
@@ -87,6 +100,7 @@ struct ContentView: View {
                     UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .unspecified
                 }
             }
+        //Toolbar Of Quick Actions
         .toolbar(id: "quick-actions") {
             ToolbarItem(id: "settings", placement: .primaryAction) {
                 Button(action: {activeSheet = .settings}) {
@@ -145,6 +159,7 @@ struct ContentView: View {
                 .keyboardShortcut("c", modifiers: [.command, .shift])
             }
         }
+        //Sheet That Swaps Between Settings, Metadata And File Export When Differnent Buttons Pressed
         .sheet(item: $activeSheet) { item in
             switch item {
             case .settings:
@@ -164,6 +179,7 @@ struct ContentView: View {
         .toolbarRole(.editor)
         .navigationBarTitleDisplayMode(.inline)
     }
+    //Form Showing File Metadata
     var metadata: some View {
         Form {
             Section {
@@ -181,6 +197,7 @@ struct ContentView: View {
         }
         .navigationTitle("Metadata")
     }
+    //Form Showing Export Options, File Print Button And File Exporters
     var export: some View {
         Form {
             Group {
@@ -425,6 +442,7 @@ struct ContentView: View {
             }
         }
     }
+    //Fetch The File Attributes For The Open Document
     func getAttributes() {
         let creationDate = fileURL.creationDate
         let modificationDate = fileURL.modificationDate
@@ -444,6 +462,7 @@ struct ContentView: View {
         fileModifiedAttribute = modificationDate!
         fileCreatedAttribute = creationDate!
     }
+    //Copy The Whole Document To The Clipboard
     private func copyToClipBoard(textToCopy: String) {
         let paste = UIPasteboard.general
         paste.string = textToCopy
@@ -456,6 +475,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+//Fetch The File Attribute Keys From An Extension To URL
 extension URL {
     var attributes: [FileAttributeKey : Any]? {
         do {
@@ -491,6 +511,7 @@ extension URL {
     }
 }
 
+//Setup Multi Sheet Swapping Variables
 enum ActiveSheet: Identifiable {
     case settings, metadata, export
     
@@ -499,6 +520,7 @@ enum ActiveSheet: Identifiable {
     }
 }
 
+//Implement keyWindow For Appearance Changes
 extension UIApplication {
     var keyWindow: UIWindow? {
         return self.connectedScenes
@@ -509,6 +531,7 @@ extension UIApplication {
     }
 }
 
+//Setup The Print File Button View
 struct PrintSetup<Page>: View where Page: View {
     let page: Page
     var body: some View {

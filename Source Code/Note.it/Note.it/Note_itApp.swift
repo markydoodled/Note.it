@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct Note_itApp: App {
     var body: some Scene {
+        //Create Document Window For Editor
         DocumentGroup(newDocument: Note_itDocument()) { file in
             ContentView(document: file.$document, fileURL: URL(string: "/")!, fileTypeAttribute: "N/A", fileSizeAttribute: 0, fileTitleAtribute: "N/A", fileCreatedAttribute: Date(), fileModifiedAttribute: Date(), fileExtensionAttribute: "N/A", fileOwnerAttribute: "N/A", filePathAttribute: "N/A")
                 .frame(minWidth: 850, minHeight: 400)
                 .focusedSceneValue(\.document, file.$document)
         }
+        //Load Menu Bar Commands
         .commands {
             SidebarCommands()
             ToolbarCommands()
@@ -22,6 +24,7 @@ struct Note_itApp: App {
                 ExportCommandView()
             }
         }
+        //Set System Settings Window
         Settings {
             SettingsView()
                 .frame(width: 600, height: 400)
@@ -29,6 +32,7 @@ struct Note_itApp: App {
     }
 }
 
+//Build Export Menu Items
 struct ExportCommandView: View {
     @FocusedBinding(\.document) var document
     
@@ -282,6 +286,7 @@ struct ExportCommandView: View {
     }
 }
 
+//Link Document To Other Views
 extension FocusedValues {
     struct DocumentFocusedValues: FocusedValueKey {
         typealias Value = Binding<Note_itDocument>

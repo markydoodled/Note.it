@@ -10,11 +10,14 @@ import AppKit
 import CodeMirror_SwiftUI
 
 struct ContentView: View {
+    //Load In Document
     @Binding var document: Note_itDocument
     
+    //Load In Settings
     @State var editor = EditorSettings()
     @State var themes = ThemeSettings()
     
+    //Create Metadata Stores
     @State var fileURL: URL
     @State var fileTypeAttribute: String
     @State var fileSizeAttribute: Int64
@@ -31,9 +34,11 @@ struct ContentView: View {
         return bcf
     }()
     
+    //Store Forced App Appearance
     @AppStorage("selectedAppearance") var selectedAppearance = 3
     var body: some View {
         NavigationSplitView {
+            //Sidebar Of File Metadata
             List {
                 Section {
                     Text("\(NSDocumentController().currentDocument?.displayName ?? "None")")
@@ -86,6 +91,7 @@ struct ContentView: View {
             }
             .frame(minWidth: 250)
         } detail: {
+            //Code Editor View
             GeometryReader { reader in
                 ScrollView {
                     CodeView(theme: themes.theme, code: $document.text, mode: themes.syntax.mode(), fontSize: editor.fontSize, showInvisibleCharacters: editor.showInvisibleCharacters, lineWrapping: editor.lineWrapping)
@@ -104,6 +110,7 @@ struct ContentView: View {
                 }
                 .frame(height: reader.size.height)
             }
+            //Customisable Toolbar Of Quick Actions
                 .toolbar(id: "quick-actions") {
                     ToolbarItem(id: "update-metadata", placement: .status) {
                         Button(action: {
@@ -171,6 +178,7 @@ struct ContentView: View {
                 }
                 .toolbarRole(.editor)
         }
+        //TouchBar Of Quick Actions
         .touchBar {
             Button(action: {
                 fileURL = NSDocumentController().currentDocument?.fileURL ?? URL(string: "/")!
@@ -197,6 +205,7 @@ struct ContentView: View {
                 Label("Duplicate", systemImage: "doc.on.doc")
             }
         }
+        //Set The Appearance When The App Window Is Loaded
         .onAppear() {
             if selectedAppearance == 1 {
                 NSApp.appearance = NSAppearance(named: .aqua)
@@ -208,6 +217,7 @@ struct ContentView: View {
             fileURL = NSDocumentController().currentDocument?.fileURL ?? URL(string: "/")!
             getAttributes()
         }
+        //Chance The App Window Appearance When The Toggle Is Changed
         .onChange(of: selectedAppearance) { appearance in
             if selectedAppearance == 1 {
                 NSApp.appearance = NSAppearance(named: .aqua)
@@ -218,6 +228,7 @@ struct ContentView: View {
             }
         }
     }
+    //Fetch The File Metadata Attributes
     func getAttributes() {
         let creationDate = fileURL.creationDate
         let modificationDate = fileURL.modificationDate
@@ -235,6 +246,7 @@ struct ContentView: View {
         fileModifiedAttribute = modificationDate!
         fileCreatedAttribute = creationDate!
     }
+    //Copy The Whole Document To The Clipboard
     private func copyToClipBoard(textToCopy: String) {
         let pasteBoard = NSPasteboard.general
         pasteBoard.clearContents()
@@ -248,6 +260,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+//Fetch Metadata Keys Through URL Extension
 extension URL {
     var attributes: [FileAttributeKey : Any]? {
         do {
