@@ -10,9 +10,11 @@ import CodeMirror_SwiftUI
 import MessageUI
 
 struct SettingsView: View {
+    //Setup Mail Sheet View And Result Trackers
     @State var result: Result<MFMailComposeResult, Error>? = nil
     @State var isShowingMailView = false
     var body: some View {
+        //Show Settings Sections In A Form
         Form {
             EditorSettings()
             ThemesSettings()
@@ -20,13 +22,18 @@ struct SettingsView: View {
         }
         .navigationTitle("Settings")
     }
+    //Misc Settings Section
     var misc: some View {
         Section {
+            //Version Text
             LabeledContent("Version", value: "2.0")
+            //Build Text
             LabeledContent("Build", value: "5")
+            //Button To Send Feedback
             Button(action: {isShowingMailView.toggle()}) {
                 Text("Send Feedback")
             }
+            //Feedback Mail View Sheet
             .sheet(isPresented: $isShowingMailView) {
                 MailView(isShowing: self.$isShowingMailView, result: self.$result)
             }
@@ -43,14 +50,17 @@ struct SettingsView_Previews: PreviewProvider {
 }
 
 struct ThemesSettings: View {
+    //Store Editor Syntax And Theme Selection
     @AppStorage("selectedSyntax") var selectedSyntax = 51
     @AppStorage("selectedTheme") var selectedTheme = 80
     @AppStorage("syntax") var syntax: CodeMode = CodeMode.text
     @AppStorage("theme") var theme: CodeViewTheme = CodeViewTheme.zenburnesque
     var body: some View {
+        //Example Code Editor View
         Section {
             CodeView(theme: theme, code: .constant("Hello World"), mode: syntax.mode(), fontSize: 12, showInvisibleCharacters: false, lineWrapping: false)
         }
+        //Theme Picker
         Section {
             Picker(selection: $selectedTheme, label: Text("Theme")) {
                 Group {
@@ -507,6 +517,7 @@ struct ThemesSettings: View {
                 }
             }
             .pickerStyle(.menu)
+            //Detect Changes In The Theme Picker
             .onChange(of: selectedTheme) { themeValue in
                 if themeValue == 1 {
                     self.theme = CodeViewTheme.bbedit
@@ -830,6 +841,7 @@ struct ThemesSettings: View {
                     self.theme = CodeViewTheme.irWhite
                 }
             }
+            //Syntax Picker
             Picker(selection: $selectedSyntax, label: Text("Syntax")) {
                 Group {
                     Button(action: {}) {
@@ -1085,6 +1097,7 @@ struct ThemesSettings: View {
                 }
             }
             .pickerStyle(.menu)
+            //Detect Changes In The Syntax Picker
             .onChange(of: selectedSyntax) { syntax in
                 if syntax == 1 {
                     self.syntax = CodeMode.apl
@@ -1274,16 +1287,20 @@ struct ThemesSettings: View {
 }
 
 struct EditorSettings: View {
+    //Store Editor Settings
     @AppStorage("lineWrapping") var lineWrapping = true
     @AppStorage("showInvisibleCharacters") var showInvisibleCharacters = false
     @AppStorage("fontSize") var fontSize = 12
     var body: some View {
         Section {
+            //Font Size Stepper
             Stepper("Font Size - \(fontSize)", value: $fontSize, in: 1...120)
+            //Toggle Line Wrapping
             Toggle(isOn: $lineWrapping) {
                 Text("Line Wrapping")
             }
             .toggleStyle(.switch)
+            //Toggle Showing Invisible Characters
             Toggle(isOn: $showInvisibleCharacters) {
                 Text("Show Invisible Characters")
             }
@@ -1294,6 +1311,7 @@ struct EditorSettings: View {
     }
 }
 
+//Create Mail View To Send Feedback
 struct MailView: UIViewControllerRepresentable {
     @Binding var isShowing: Bool
     @Binding var result: Result<MFMailComposeResult, Error>?
